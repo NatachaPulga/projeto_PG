@@ -15,6 +15,7 @@ def main():
         #Apresenta todas as avaliações e comentários.
         def listar_avaliacoes(self):
             pass
+        
         #Apresenta todos os interesses.
         def mostrar_interesses(self):
             pass
