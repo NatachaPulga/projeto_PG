@@ -44,7 +44,13 @@ def main():
 
         #Apresenta todos os interesses.
         def mostrar_interesses(self):
-            pass
+         self.interesses = []
+         print(f"Interesses de {self.nome}:")
+         if not self. interesses:
+            print("O utilizadores não tem interesses registrados.")
+         else:
+            for interesse in self.interesses:
+                print(interesse)
 
         #Apresenta todos os artigos.
         def mostrar_artigos(self):
@@ -62,3 +68,18 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
+
+#
+dados = [5, 1, 4, 2, 3, 4, 5, 2, 6, 5]
+
+frequencia = [0 for i in range(len(dados))] 
+
+for num in dados: 
+
+       frequencia[num-1] += 1 
+
+max_freq = max(frequencia)
+
+print(max_freq)
