@@ -1,0 +1,11 @@
+nome;[interesse_1,interesse_2,…];[nome_artigo_1,preço,tipologia,quantidade&nome_artigo_2,…]
+Ana;[tecnologia,moda];[telemóvel,5,tecnologia,1&raquete de ténis,10,desporto,2]
+Manuel;[arte,viagens];[quadro Van Gogh,50,arte,1&guitarra,10,música,1&PS5,25,jogos,4]
+Silvia;[livros];
+Sofia;[jogos,música];[panela elétrica,8,cozinha,1&bilhete de avião para as Caraíbas,39,viagens,2]
+António;[viagens,cinema];[bola de futebol,16,desporto,1]
+Pedro;[cinema,culinária,tecnologia];[bicicleta,30,desporto,2]
+Raquel;[tecnologia,desporto,arte,livros];[escultura em madeira,40,arte,1]
+Paulo;[livros];[Monopoly,10,jogos,1&coluna,19,musica,1&frigideira,9,culinária,5]
+Joaquim;[jogos,música,cinema];[vinil best of k-pop,8,musica,2]
+Cristina;[moda,música,tecnologia];[casaco de inverno,22,moda,1]
