@@ -18,6 +18,9 @@ def main():
         #Adiciona uma nova avaliação, podendo incluir um comentário
         def deixar_avaliacao(self, estrelas, comentario):
             # O '\n' é para fazer uma quebra de linha.
+            # O '.append()' é um método que adiciona um elemento ao final da lista.
+            # O '{"estrelas": estrelas, "comentario": comentario}' é um dicionário. Está a ser adicionado à lista de avaliações. Este dicionário representa uma única avaliação feita pelo usuário. Ele tem duas chaves: "estrelas" e "comentario".
+            # 'estrelas' e 'comentario' atribuiem o valor da variável à palavra chave "estrelas" e "comentario" no dicionário. 
             self.avaliacoes.append({"estrelas": estrelas, "comentario": comentario})
             print(f"Avaliação do usuário {self.nome}, foi registrada com sucesso!")
 
