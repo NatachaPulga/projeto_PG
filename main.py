@@ -40,8 +40,7 @@ def main():
 
 
         #Apresenta todos os interesses.
-        def mostrar_interesses(self):
-         self.interesses = []
+        def mostrar_interesses(self):  
          print(f"Interesses de {self.nome}:")
          if not self.interesses:
             print("O utilizador não tem interesses registados.")
@@ -52,7 +51,6 @@ def main():
 
         #Apresenta todos os artigos.
         def mostrar_artigos(self):
-         self.artigos_disponiveis = [] 
          print(f"Artigos disponíveis de {self.nome}:")
          if not self.artigos_disponiveis:
             print("O utilizador não tem artigos disponíveis.")
