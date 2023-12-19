@@ -37,23 +37,21 @@ def main():
 
         #Apresenta todos os interesses.
         def mostrar_interesses(self):  
-         print(f"Interesses de {self.nome}:")
-         if not self.interesses:
-            print("O utilizador não tem interesses registados.")
-         else:
-            for interesse in self.interesses:
-              
-                print(interesse)
+            print(f"Interesses de {self.nome}:")
+            if not self.interesses:
+                print("O utilizador não tem interesses registados.")
+            else:
+                for interesse in self.interesses:
+                    print(interesse)
 
         #Apresenta todos os artigos.
         def mostrar_artigos(self):
-         print(f"Artigos disponíveis de {self.nome}:")
-         if not self.artigos_disponiveis:
-            print("O utilizador não tem artigos disponíveis.")
-         else:
-            for artigo in self.artigos_disponiveis:
-              
-                print(artigo)
+            print(f"Artigos disponíveis de {self.nome}:")
+            if not self.artigos_disponiveis:
+                print("O utilizador não tem artigos disponíveis.")
+            else:
+                for artigo in self.artigos_disponiveis:
+                    print(artigo)
 
         #Altera o número de pycoins.
         def alterar_pycoins(self, numero_pycoins):
