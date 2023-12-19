@@ -77,33 +77,36 @@ def main():
             self.preco = preco
             self.tipologia = tipologia
             self.quantidade = quantidade
-
+            # Percentagem fixa da subida ou descido do preço dos artigos.
+            self.percentagem_alteracao = 0.25
 
         #Altera o nome de um artigo para o novo nome recebido
         def editar_nome(self, nome):
-            pass
+            self.nome = nome
+            print(f"Nome do artigo foi alterado para: {nome}")
         
-
         #Altera o preço de um artigo de acordo com a percentagem dada
         def ajustar_preco(self, percentagem_alteracao):
-            pass
+            # Preço aumenta 25%, se a quantidade do artigo for menor ou igual a 3.
+            if self.quantidade <= 3:
+                self.preco = self.preco + (self.preco * percentagem_alteracao)
+             # Preço diminui 25%, se a quantidade do artigo for maior que 10.
+            elif self.quantidade > 10:
+                self.preco = self.preco - (self.preco * percentagem_alteracao)
         
-
         #Altera o preço para o novo preço recebido
         def editar_preco(self, preco):
-            pass
+            self.preco = preco
+            print(f"Preço do artigo foi alterado para: {preco}")
         
-
         #Apresenta o preço do artigo
         def mostrar_preco(self):
-            pass
+            print(f"Preço do artigo: {self.preco}")
         
-
         #Altera a quantidade
         def editar_quantidade(self, nova_quantidade):   
             self.quantidade = nova_quantidade
             print(f"A quantidade do artigo {self.nome} é trocada para uma {nova_quantidade}.")
-
 
         #Apresenta a quantidade do artigo
         def mostrar_quantidade(self):
@@ -112,13 +115,11 @@ def main():
             else:
                 print(f"A quantidade do artigo {self.nome} não está feita.")
         
-
         #Altera a tipologia
         def editar_tipo (self, novo_tipo):
              self.tipologia = novo_tipo
              print(f"Tipologia do artigo {self.nome} é trocada para um {novo_tipo}.")
         
-
         #Apresenta a tipologia do artigo
         def mostrar_tipo (self):    
             if not self.tipologia:
