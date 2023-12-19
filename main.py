@@ -59,13 +59,21 @@ def main():
               
                 print(artigo)
 
+
         #Altera o número de pycoins.
         def alterar_pycoins(self, numero_pycoins):
-            pass
+           self.pycoins = numero_pycoins
+           print(f" O Número de pycoins de {self.nome} altera para o {numero_pycoins}.")
+
+
 
         #Apresenta o número de pycoins.
         def mostrar_pycoins(self):
-            pass
+         print(f" número de pycoins de {self.nome}")
+         if not self.pycoins:
+            print("O utilizador não tem pycoins disponíveis.")
+         else:
+             print(self.pycoins)
     
 
 
