@@ -6,6 +6,8 @@ def main():
             self.nome = nome
             self.interesses = interesses
             self.artigos_disponiveis = artigos_disponiveis
+            # Lista para armazenar as avaliações.
+            self.avaliacoes = []
 
         #Altera os interesses e/ou os artigos de um utilizador
         def editar_conta(self, novos_interesses, novos_artigos):
@@ -21,8 +23,6 @@ def main():
 
         #Apresenta todas as avaliações e comentários
         def listar_avaliacoes(self):
-            # Lista para armazenar as avaliações.
-            self.avaliacoes = []
             # Para verificar se a lista 'self.avaliacoes' está vazia.
             if not self.avaliacoes:
                 print(f"Ainda não há avaliações para {self.nome}.")
