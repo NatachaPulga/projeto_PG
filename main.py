@@ -42,7 +42,8 @@ def main():
                 print("O utilizador não tem interesses registados.")
             else:
                 for interesse in self.interesses:
-                    print(interesse)
+              
+                 print(interesse)
 
         #Apresenta todos os artigos.
         def mostrar_artigos(self):
@@ -51,20 +52,21 @@ def main():
                 print("O utilizador não tem artigos disponíveis.")
             else:
                 for artigo in self.artigos_disponiveis:
-                    print(artigo)
+              
+                 print(artigo)
 
         #Altera o número de pycoins.
         def alterar_pycoins(self, numero_pycoins):
-            self.pycoins = numero_pycoins
-            print(f" O Número de pycoins de {self.nome} altera para o {numero_pycoins}.")
+           self.pycoins = numero_pycoins
+           print(f" O Número de pycoins de {self.nome} é trocada para o {numero_pycoins}.")
 
         #Apresenta o número de pycoins.
         def mostrar_pycoins(self):
-            print(f" número de pycoins de {self.nome}")
-            if not self.pycoins:
-                print("O utilizador não tem pycoins disponíveis.")
-            else:
-                print(self.pycoins)
+         print(f" número de pycoins de {self.nome}")
+         if not self.pycoins:
+            print("O utilizador não tem pycoins disponíveis.")
+         else:
+             print(self.pycoins)
     
 
     #Funcionalidades relativas a um artigo
@@ -76,37 +78,53 @@ def main():
             self.tipologia = tipologia
             self.quantidade = quantidade
 
+
         #Altera o nome de um artigo para o novo nome recebido
         def editar_nome(self, nome):
             pass
         
+
         #Altera o preço de um artigo de acordo com a percentagem dada
         def ajustar_preco(self, percentagem_alteracao):
             pass
         
+
         #Altera o preço para o novo preço recebido
         def editar_preco(self, preco):
             pass
         
+
         #Apresenta o preço do artigo
         def mostrar_preco(self):
             pass
         
+
         #Altera a quantidade
-        def editar_quantidade(self, nova_quantidade):
-            pass
-        
+        def editar_quantidade(self, nova_quantidade):   
+            self.quantidade = nova_quantidade
+            print(f"A quantidade do artigo {self.nome} é trocada para uma {nova_quantidade}.")
+
+
         #Apresenta a quantidade do artigo
         def mostrar_quantidade(self):
-            pass
+            if not self.quantidade:
+                print(f"O artigo {self.nome} tem {self.quantidade} unidades disponiveis.")
+            else:
+                print(f"A quantidade do artigo {self.nome} não está feita.")
         
+
         #Altera a tipologia
         def editar_tipo (self, novo_tipo):
-            pass
+             self.tipologia = novo_tipo
+             print(f"Tipologia do artigo {self.nome} é trocada para um {novo_tipo}.")
         
+
         #Apresenta a tipologia do artigo
         def mostrar_tipo (self):    
-            pass
+            if not self.tipologia:
+                print(f"A tipologia do artigo {self.nome}: para uma {self.tipologia}")
+            else:
+                print(f"A tipologia do artigo {self.nome} não está feita.")
         
 
 
