@@ -152,28 +152,52 @@ def main():
         #Construtor
         def __init__(self):
             # Iniciar a lista de utilizadores vazia._(NECESSIDADE DE ALGO DESTE TIPO EXISTIR PARA CONTINUAR)
+            self.utilizadores = []
+            self.artigos = []
+            self.avaliacoes = []
             self.lista_de_utilizadores = []
     
     
 
         #Adiciona um novo utilizador recebendo o nome, interesses e artigos
         def registar_utilizador (self, nome, interesses, artigos_disponiveis):
-            pass
+            novo_utilizador = Utilizador(nome, interesses, artigos_disponiveis)
+            self.utilizadores.append(novo_utilizador)
+            print(f"O utilizador {nome} foi registado dentro da Feira Virtual.")
+            feira_virtual = FeiraVirtual()
+
+            #Aqui fica uma lista para todos os utilizadores e os seus interesses e artigos
+            for utilizador in feira_virtual.utilizadores:
+                print(f"Nome do Utilizador: {utilizador.nome}, Interesses do Utilizador: {utilizador.interesses}, Artigos Disponíveis: {utilizador.artigos_disponiveis}")
+         
+        
+            feira_virtual.registar_utilizador("Maria", ["Moda", "Cinema"], ["Telemóvel", 5, "Jogos", 4]) #É aqui que é adicionado um novo utilizador
 
 
         #Importa uma lista de utilizadores a partir de um ficheiro
         def importar_utilizadores(self, nome_ficheiro):
             pass
+            #(está ainda a ser feito!)
 
 
         #Elimina um utilizador
         def eliminar_conta(self, nome_utilizador):
-            pass
+            for utilizador in self.utilizadores:
+                if utilizador.nome == nome_utilizador:
+                    self.utilizadores.remove(utilizador)
+                    print(f" O utilizador {nome_utilizador}  será eliminado da Feira Virtual.")
+                    return
 
 
         #Apresenta todos os artigos disponíveis ordenados por preço
         def listar_artigos(self):
-            pass
+            print(f"Artigos disponíveis para {self.nome}, ordenados por preço:")
+            if not self.artigos_disponiveis:
+                print("O utilizador não tem artigos disponíveis.")
+            else:
+                artigos_ordem = sorted(self.artigos_disponiveis,  #key=lambda x: x[1])  
+                for artigo in artigos_ordem:
+                    print(artigo)
 
 
         #Efetua uma compra de um artigo. O comprador e o vendedor são os nomes de dois utilizadores registados
