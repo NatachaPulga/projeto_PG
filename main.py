@@ -66,6 +66,7 @@ def main():
            self.pycoins = numero_pycoins
            print(f" O Número de pycoins de {self.nome} é trocada para o {numero_pycoins}.")
 
+
         #Apresenta o número de pycoins.
         def mostrar_pycoins(self):
          print(f" número de pycoins de {self.nome}")
@@ -74,6 +75,8 @@ def main():
          else:
              print(self.pycoins)
     
+
+
 
 
     #Funcionalidades relativas a um artigo
@@ -146,19 +149,17 @@ def main():
 
 
 
-
     #Gestão da feira, avaliações e negociação automática
     class FeiraVirtual:
         #Construtor
         def __init__(self):
-            # Iniciar a lista de utilizadores vazia._(NECESSIDADE DE ALGO DESTE TIPO EXISTIR PARA CONTINUAR)
+            # Iniciar listas vazias.
             self.utilizadores = []
             self.artigos = []
             self.avaliacoes = []
             self.lista_de_utilizadores = []
     
     
-
         #Adiciona um novo utilizador recebendo o nome, interesses e artigos
         def registar_utilizador (self, nome, interesses, artigos_disponiveis):
             novo_utilizador = Utilizador(nome, interesses, artigos_disponiveis)
@@ -334,6 +335,45 @@ def main():
         #Início da feira. O grupo deve apresentar testes do projeto nesta função
         def main():
             pass
+   
+
+
+
+
+    # Gestão da lista de artigos disponíveis na feira
+    class Mercado:
+        #Construtor
+        def __init__(self):
+            # Inicia a lista de artigos vazia.
+            self.artigos = []
+
+        #Adiciona um novo artigo
+        def adicionar_artigo(self, artigo):
+            self.artigos.append(artigo)
+
+        #Elimina um artigo
+        def remover_artigo(self, artigo):
+            if artigo in self.artigos:
+                self.artigos.remove(artigo)
+
+        #Mostra o nome, preço e quantidade do artigo recebido
+        def mostrar_artigo(self, artigo):
+            # Percorre cada item na lista de artigos.
+            for artigo in self.artigos:
+                # Verifica se o nome do artigo, coincide com o nome do artigo recebido como parâmetro.
+                if artigo.nome == artigo:
+                    # Exibe o nome, preço e quantidade do artigo.
+                    print(f"Artigo: {artigo.nome}")
+                    print(f"Preço: {artigo.preco}")
+                    print(f"Quantidade: {artigo.quantidade}")
+                    # Para encerra a função após encontrar o artigo correspondente.
+                    return
+                
+            # Exibe mensagem se o artigo não for encontrado na lista.
+            print("Artigo não encontrado.")
+
+
+
 
 
 
