@@ -73,9 +73,9 @@ def main():
                 else:
                     print(f"O número de pycoins de {self.nome}: {self.pycoins}")
 
-
+            #Remover o artigo da lista de artigos do utilizador
             def remover_artigo(self,artigo):
-                self.artigos_disponiveis.remove(artigo) #altera a quantidade e se ficar a 0 remove
+                self.artigos_disponiveis.remove(artigo)
                 print(f"O artigo {artigo.nome} foi eliminado da Feira Virtual.")
 
 
