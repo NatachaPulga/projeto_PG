@@ -9,7 +9,7 @@ def main():
                 # Lista para armazenar as avaliações.
                 self.avaliacoes = []
                 # Armazena pycoins
-                self.pycoins = 0
+                self.pycoins = 50
 
 
             #Altera os interesses e/ou os artigos de um utilizador
@@ -68,12 +68,17 @@ def main():
 
             #Apresenta o número de pycoins.
             def mostrar_pycoins(self):
-                print(f"O número de pycoins de {self.nome}:")
                 if not self.pycoins:
                     print("O utilizador não tem pycoins disponíveis.")
                 else:
-                    print(self.pycoins)
-        
+                    print(f"O número de pycoins de {self.nome}: {self.pycoins}")
+
+
+            def remover_artigo(self,artigo):
+                self.artigos_disponiveis.remove(artigo) #altera a quantidade e se ficar a 0 remove
+                print(f"O artigo {artigo.nome} foi eliminado da Feira Virtual.")
+
+
 
 
 
@@ -158,6 +163,9 @@ def main():
                 self.avaliacoes = []
         
         
+            #!!!! A FAZER: Requisito nome de utilizador único -> verifica se o nome já existe. se existir, concatena "_1" e verifica novamente se existe
+            #!!!! A VALIDAR: Quando é que se ajusta preço de um artigo? quando é criado o utilizador?
+
             #Adiciona um novo utilizador recebendo o nome, interesses e artigos
             def registar_utilizador (self, nome, interesses, artigos_disponiveis):
                 
@@ -176,7 +184,7 @@ def main():
                 # Criação da lista de artigos do utilizador. Caso não existem artigos, é criado um utilizador com lista de artigos vazia
                 artigos_utilizador = []
                 for artigo in artigos:
-                    novo_artigo = Artigo(artigo[0], float(artigo[1]), artigo[2], int(artigo[3])) #artigo[0] corresponde ao nome, artigo[1] é o preço, artigo[2] é a tipologia e artigo[3] a quantidade
+                    novo_artigo = Artigo(artigo[0], int(artigo[1]), artigo[2], int(artigo[3])) #artigo[0] corresponde ao nome, artigo[1] é o preço, artigo[2] é a tipologia e artigo[3] a quantidade
                     artigos_utilizador.append(novo_artigo)
 
                 novo_utilizador = Utilizador(nome, interesses, artigos_utilizador)
@@ -214,7 +222,7 @@ def main():
                         # Criação da lista de artigos do utilizador
                         artigos_utilizador = []
                         for artigo in artigos:
-                            novo_artigo = Artigo(artigo[0], float(artigo[1]), artigo[2], int(artigo[3])) #artigo[0] corresponde ao nome, artigo[1] é o preço, artigo[2] é a tipologia e artigo[3] a quantidade
+                            novo_artigo = Artigo(artigo[0], int(artigo[1]), artigo[2], int(artigo[3])) #artigo[0] corresponde ao nome, artigo[1] é o preço, artigo[2] é a tipologia e artigo[3] a quantidade
                             artigos_utilizador.append(novo_artigo)
 
                         #Cria o novo utilizador e adiciona à lista
@@ -268,12 +276,20 @@ def main():
                         utilizador.mostrar_pycoins()
 
 
-            #Apresenta todos os artigos disponíveis ordenados por preço
-            def listar_artigos(self):
-                lista_completa_artigos = [] # Lista auxiliar de artigos de todos os users
+            #Função auxiliar para agregar todos os artigos numa única lista
+            def devolve_lista_completa_artigos(self):
+                lista_completa_artigos = []
                 for utilizador in self.utilizadores:
                     for artigo in utilizador.artigos_disponiveis:
                         lista_completa_artigos.append(artigo)
+                return lista_completa_artigos
+            
+
+            #Apresenta todos os artigos disponíveis ordenados por preço
+            def listar_artigos(self):
+
+                #Devolve a lista de artigos de todos os utilizadores
+                lista_completa_artigos = self.devolve_lista_completa_artigos()
 
                 if not lista_completa_artigos:
                     print("Não existem artigos disponíveis.")
@@ -290,26 +306,47 @@ def main():
 
             #Efetua uma compra de um artigo. O comprador e o vendedor são os nomes de dois utilizadores registados
             def comprar_artigo(self, comprador, vendedor, artigo):
-                pass
-                #valida se o artigo existe
-                #validar se o comprador tem pycoins suficientes
-            
-                #guardar o preço do artigo
 
-                for utilizador in self.utilizadores:
-                    if comprador == utilizador.nome:
-                        pycoins_atuais = utilizador.pycoins
-                        if pycoins_atuais >= self.preco:
-                            pycoints_atualizar = utilizador.pycoins - self.preco
-                            utilizador.alterar_pycoins            
+                #Devolve a lista de artigos de todos os utilizadores
+                lista_completa_artigos = self.devolve_lista_completa_artigos()
+
+                #Variaveis para guardar objetos Utilizador e Artigo
+                artigo_a_vender = None
+                utilizador_comprador = None
+                utilizador_vendedor = None
+
+                #Guarda o objeto Artigo para depois aceder à quantidade e preço
+                for artigo_aux in lista_completa_artigos:
+                    if artigo_aux.nome == artigo:
+                        artigo_a_vender = artigo_aux
+
+                #Valida a disponibilidade do artigo
+                if artigo_a_vender is None or artigo_a_vender.quantidade < 1: #Caso não encontre o artigo na lista ou a quantidade não seja positiva
+                    print(f"O artigo {artigo} não se encontra disponível para venda.")
+                else:
+                    #Guarda os objetos Utilizador do comprador e vendedor
+                    for utilizador in self.utilizadores:
+                        if comprador == utilizador.nome:
+                            utilizador_comprador = utilizador
+                        if vendedor == utilizador.nome:
+                            utilizador_vendedor = utilizador   
+                    
+                    if utilizador_comprador.pycoins >= artigo_a_vender.preco:
+                        #Processamento comprador
+                        pycoins_atualizar = utilizador_comprador.pycoins - artigo_a_vender.preco
+                        utilizador_comprador.alterar_pycoins(pycoins_atualizar)
+                        #Processamento vendedor
+                        pycoins_atualizar = utilizador_vendedor.pycoins + artigo_a_vender.preco
+                        utilizador_vendedor.alterar_pycoins(pycoins_atualizar)
+                        #Finalização compra
+                        print(f"{comprador} comprou {artigo} de {vendedor} com sucesso!")
+                        if artigo_a_vender.quantidade == 1:
+                            utilizador_vendedor.remover_artigo(artigo_a_vender) #Remove o artigo porque apenas tinha 1 unidade
                         else:
-                            print("NÃO TEM PYCOINS SUFICIENTES") 
-
-                            
-                #comprador reduz o seu valor de pycoins (pycoins atuais - preço)
-                #vendedor aumenta o seu valor de pycoins (pycoins atuais + preço)
-                #artigo reduz a qtd de artigos disponiveis. se ficar a 0, sai da lista de artigos disponiveis do vendedor
-                #retirar artigo do mercado
+                            artigo_a_vender.editar_quantidade(artigo_a_vender.quantidade-1) #Diminui a quantidade em 1
+                    else:
+                        print(f"{comprador} não tem pycoins suficientes.")
+            
 
 
             #Calcula a reputação de um utilizador com base nas suas avaliações
@@ -505,6 +542,13 @@ def main():
     #feira_virtual.registar_utilizador("Sofia","[jogos,música]","[panela elétrica,8,cozinha,1&bilhete de avião para as Caraíbas,39,viagens,2]")
     #feira_virtual.listar_utilizadores()
 
+    #Teste compra de artigo
+    #feira_virtual.comprar_artigo("Manuel", "Ana", "telemóvel")
+    #feira_virtual.mostrar_artigos_utilizador("Ana")
+
+    #Teste comprar artigo nao disponivel
+    #feira_virtual.comprar_artigo("Manuel", "Ana", "tv")
+
     #Teste listar interesses de todos os utilizadores
     #for utilizador in feira_virtual.utilizadores:
     #    utilizador.mostrar_interesses()
@@ -543,7 +587,8 @@ def main():
     #feira_virtual.listar_artigos()
 
 
-
+# diversão começa quando os utilizadores descobrem que certos artigos têm valores de 
+#mercado que podem variar com base na oferta e procura
 
 
 
