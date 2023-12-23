@@ -346,7 +346,7 @@ def main():
                         artigo.editar_preco(preco)
                         print(f"O artigo '{artigo.nome}' foi colocado à venda por {preco} pycoins.")
 
-                    # Se não se verificar que o artigo pertence ao vendedor.
+                     # Se não se verificar que o artigo pertence ao vendedor.
                     else:
                         print(f"O utilizador {vendedor.nome} não possui o artigo '{artigo.nome}' para venda.")
 
