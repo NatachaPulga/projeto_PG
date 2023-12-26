@@ -522,10 +522,260 @@ def main():
 
 
 
-    feira_virtual = FeiraVirtual()
+
+
+
+
+
+
+    # Iniciar programa.
+    def main():
+        # Para a class 'FeiraVirtual' funcionar.
+        feira = FeiraVirtual() 
+
+        print("Bem-vindo/a à Feira Virtual. Pretende aceder a:")
+        print("1 - Utilizadores")
+        print("2 - Artigos")
+        print("3 - Mercado")
+
+        escolha = input(" ")
+
+        # Para garantir uma das escolhas pretendidas.
+        while escolha not in ["1", "2", "3"]:
+            print("Escolha entre:")
+            print("1 - Utilizadores")
+            print("2 - Artigos")
+            print("3 - Mercado")
+
+            escolha = input(" ")
+
+        
+        # Se o utilizador escolher '1 - Utilizadores'.
+        if escolha == "1":
+            # Tem de estar dentro do loop para se conseguir voltar a atrás.
+            while True:
+                print("Pretende aceder a:")
+                print("1 - Registo de utilizadores")
+                print("2 - Alteração de um utilizador")
+                print("3 - Eliminação de conta de um utilizador")
+                print("4 - Lista de utilizadores")
+                print("5 - Mostrar artigos de um utilizador")
+                print("6 - Mostrar interesses de um utilizador")
+                print("7 - Mostrar Pycoins de um utilizador")
+                print("V - Voltar atrás")
+                print("S - Sair")
+
+                escolha_utilizadores = input(" ")
+
+                # Para garantir uma das escolhas pretendidas.
+                while escolha_utilizadores not in ["1", "2", "3", "4", "5", "6", "7", "V", "S"]:
+                    print("Escolha entre:")
+                    print("1 - Registo de utilizadores")
+                    print("2 - Alteração de um utilizador")
+                    print("3 - Eliminação de conta de um utilizador")
+                    print("4 - Lista de utilizadores")
+                    print("5 - Mostrar artigos de um utilizador")
+                    print("6 - Mostrar interesses de um utilizador")
+                    print("7 - Mostrar Pycoins de um utilizador")
+                    print("V - Voltar atrás")
+                    print("S - Sair")
+
+                    escolha_utilizadores = input(" ")
+
+                # Se o utilizador escolher '1 - Registo de utilizadores'.
+                if escolha_utilizadores == "1":
+                    # Tem de estar dentro do loop para se conseguir voltar a atrás.
+                    while True:
+                        print("Pretende aceder a:")
+                        print("1 - Registo manual")
+                        print("2 - Registo por ficheiro")
+                        print("V - Voltar atrás")
+
+                        escolha_registo = input(" ")
+
+                        # Para garantir uma das escolhas pretendidas.
+                        while escolha_registo not in ["1", "2", "V"]:
+                            print("Escolha entre:")
+                            print("1 - Registo manual")
+                            print("2 - Registo por ficheiro")
+                            print("V - Voltar atrás")
+
+                            escolha_registo = input(" ")
+
+                        #  Se o utilizador escolher '1 - Registo manual'.
+                        if escolha_registo == "1":
+                            # ...
+                            print("Registo manual criado com sucesso!")
+                            break # Para voltar ao menu.
+
+
+                         #  Se o utilizador escolher '2 - Registo por ficheiro'.
+                        elif escolha_registo == "2":
+                            # ...
+                            print("Registo por ficheiro criado com sucesso!")
+                            break # Para voltar ao menu.
+
+
+                         #  Se o utilizador escolher 'V - Voltar atrás'.
+                        elif escolha_registo.upper() == "V":
+                            break  # Para voltar ao menu.
+          
+
+
+
+                 # Se o utilizador escolher '2 - Alteração de um utilizador'.
+                elif escolha_utilizadores == "2":
+                    pass
+
+                 # Se o utilizador escolher '3 - Eliminação de conta de um utilizador'.
+                elif escolha_utilizadores == "3":
+                    pass
+
+                 # Se o utilizador escolher '4 - Lista de utilizadores'.
+                elif escolha_utilizadores == "4":
+                    pass
+
+                 # Se o utilizador escolher '5 - Mostrar artigos de um utilizador'.
+                elif escolha_utilizadores == "5":
+                    pass
+
+                 # Se o utilizador escolher '6 - Mostrar interesses de um utilizador'.
+                elif escolha_utilizadores == "6":
+                    pass
+
+                 # Se o utilizador escolher '7 - Mostrar Pycoins de um utilizador'.
+                elif escolha_utilizadores == "7":
+                    pass
+
+                 # Se o utilizador escolher 'V - Voltar atrás'.
+                elif escolha_utilizadores.upper() == "V":
+                    break  # Para voltar ao menu.
+
+                 # Se o utilizador escolher 'S - Sair'.
+                elif escolha_utilizadores.upper() == "S":
+                    print("Obrigado por usar a Feira Virtual. Até logo!")
+                    return  # Para encerra o programa.
+
+
+
+
+
+
+
+         # Se o utilizador escolher '2 - Artigos'.
+        elif escolha == "2":
+            # Tem de estar dentro do loop para se conseguir voltar a atrás.
+            while True:
+                print("Pretende aceder a:")
+                print("1 - Mostrar preço de um artigo")
+                print("2 - Mostrar quantidade de um artigo")
+                print("3 - Mostrar tipo de um artigo")
+                print("4 - Importar Artigos")
+                print("V - Voltar atrás")
+                print("S - Sair")
+
+                escolha_artigos = input(" ")
+
+                # Para garantir uma das escolhas pretendidas.
+                while escolha_artigos not in ["1", "2", "3", "4", "V", "S"]:
+                    print("Escolha uma opção válida:")
+                    print("1 - Mostrar preço de um artigo")
+                    print("2 - Mostrar quantidade de um artigo")
+                    print("3 - Mostrar tipo de um artigo")
+                    print("4 - Importar Artigos")
+                    print("V - Voltar atrás")
+                    print("S - Sair")
+
+                    escolha_artigos = input(" ")
+
+                # Se o utilizador escolher '1 - Mostrar preço de um artigo'.
+                if escolha_artigos == "1":
+                    pass
+
+                 # Se o utilizador escolher '2 - Mostrar quantidade de um artigo'.
+                elif escolha_artigos == "2":
+                    pass
+                 
+                 # Se o utilizador escolher '3 - Mostrar tipo de um artigo'.
+                elif escolha_artigos == "3":
+                    pass
+
+                 # Se o utilizador escolher '4 - Importar Artigos'.
+                elif escolha_artigos == "4":
+                    pass
+                 
+                  # Se o utilizador escolher 'V - Voltar atrás'.
+                elif escolha_artigos.upper() == "V":
+                    break  # Para voltar ao menu.
+                 
+                 # Se o utilizador escolher 'S - Sair'.
+                elif escolha_artigos.upper() == "S":
+                    print("Obrigado por usar a Feira Virtual. Até logo!")
+                    return  # Para encerra o programa.
+
+
+
+
+
+
+
+         # Se o utilizador escolher '3 - Mercado'.
+        elif escolha == "3":
+            # Tem de estar dentro do loop para se conseguir voltar a atrás.
+            while True:
+                print("Pretende aceder a:")
+                print("1 - Adicionar Artigo ao Mercado")
+                print("2 - Remover Artigo do Mercado")
+                print("3 - Listar Artigos do Mercado")
+                print("V - Voltar atrás")
+                print("S - Sair")
+
+                escolha_mercado = input(" ")
+
+                # Para garantir uma das escolhas pretendidas.
+                while escolha_mercado.upper() not in ["1", "2", "3", "V", "S"]:
+                    print("Escolha entre:")
+                    print("1 - Adicionar Artigo ao Mercado")
+                    print("2 - Remover Artigo do Mercado")
+                    print("3 - Listar Artigos do Mercado")
+                    print("V - Voltar atrás")
+                    print("S - Sair")
+
+                    escolha_mercado = input(" ")
+
+                # Se o utilizador escolher '1 - Adicionar Artigo ao Mercado'.
+                if escolha_mercado == "1":
+                    pass
+
+                 # Se o utilizador escolher '2 - Remover Artigo do Mercado'.
+                elif escolha_mercado == "2":
+                    pass
+
+                 # Se o utilizador escolher '3 - Listar Artigos do Mercado'.
+                elif escolha_mercado == "3":
+                    pass
+
+                 #  Se o utilizador escolher 'V - Voltar atrás'.
+                elif escolha_mercado.upper() == "V":
+                    break  # Para voltar ao menu.
+
+                 #  Se o utilizador escolher 'S - Sair'.
+                elif escolha_mercado.upper() == "S":
+                    print("Obrigado por usar a Feira Virtual. Até logo!")
+                    return  # Para encerra o programa.
+
+
+
+
+
+
+
+    
 
 
     ###### Testes
+
+    # feira_virtual = FeiraVirtual()
 
     ## Teste registar utilizador via ficheiro
     #feira_virtual.importar_utilizadores("C:/Users/biaga/Downloads/utilizadoresartigos.txt") #as barras têm que ser na direção /
