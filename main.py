@@ -376,7 +376,7 @@ def main():
             #Coloca um artigo à venda. O vendedor é o nome de um utilizador
             def colocar_artigo_para_venda(self, vendedor, artigo, preco):
                 # Verifica se o vendedor existe na feira virtual.
-                if vendedor in self.lista_de_utilizadores:
+                if vendedor in self.utilizadores:
                     # Verifica se o artigo pertence ao vendedor.
                     if artigo in vendedor.artigos_disponiveis:
                         # Define o preço do artigo e o coloca à venda.
@@ -398,7 +398,7 @@ def main():
                 compradores_interessados = []
 
                 # Loop que percorre cada usuário na lista de utilizadores.
-                for usuario in self.lista_de_utilizadores:
+                for usuario in self.utilizadores:
                     # Verifica se o artigo está na lista de interesses do usuário.
                     if artigo.nome in usuario.interesses:
                         compradores_interessados.append(usuario.nome)
@@ -421,13 +421,13 @@ def main():
             def exportar_artigos_preco(self, nome_ficheiro):
                 # Uma lista com elementos será avaliada como True, e uma lista vazia será avaliada como False.
                 # Verifica se existem artigos na feira virtual.
-                if not self.lista_de_utilizadores:
+                if not self.utilizadores:
                     print("Não há artigos para exportar.")
                     return
 
                 # Ordena os artigos por quantidade.
                 # Em '.sort(key=lambda x: x.quantidade)', nesta caso específico, o 'key=lambda x: x.quantidade' dentro do método 'sort()', esta a usar uma função 'lambda' para extrair o atributo 'quantidade' de cada elemento da lista antes de ordená-los. Isso significa que estamos a ordenar os elementos com base nos valores do atributo 'quantidade'.
-                self.lista_de_utilizadores.sort(key=lambda x: x.quantidade)
+                self.utilizadores.sort(key=lambda x: x.quantidade)
 
                 # Abre o arquivo para escrita.
                 with open(nome_ficheiro, 'w') as arquivo:
@@ -436,7 +436,7 @@ def main():
                     arquivo.write("Lista de Artigos Ordenados por Quantidade:\n")
 
                     # Itera sobre os artigos ordenados por quantidade
-                    for artigo in self.lista_de_utilizadores:
+                    for artigo in self.utilizadores:
                         # Escreve as informações do artigo no arquivo.
                         arquivo.write(f"Nome: {artigo.nome}, Quantidade: {artigo.quantidade}, Preço: {artigo.preco}\n")
 
@@ -450,14 +450,14 @@ def main():
 
                 # Uma lista com elementos será avaliada como True, e uma lista vazia será avaliada como False.
                 # Verifica se existem utilizadores na feira virtual.
-                if not self.lista_de_utilizadores:
+                if not self.utilizadores:
                     print("Não há utilizadores para exportar.")
                     return
 
                 # Ordena a lista de utilizadores por reputação, utilizando a função 'calcular_reputacao'.
                 # Em '.sort(key=self.calcular_reputacao, reverse=True)', o 'sort()' organiza os elementos de uma lista, ele recebe um argumento 'key', que é uma função para ser chamada em cada elemento da lista, e 'reverse', que determina se a ordem de classificação deve ser reversa ou não.
-                # Ou seja: Ordena a lista de utilizadores ('lista_de_utilizadores') com base na reputação de cada utilizador ('calcular_reputacao').
-                self.lista_de_utilizadores.sort(key=self.calcular_reputacao, reverse=True)
+                # Ou seja: Ordena a lista de utilizadores ('utilizadores') com base na reputação de cada utilizador ('calcular_reputacao').
+                self.utilizadores.sort(key=self.calcular_reputacao, reverse=True)
 
                 # Abre o arquivo para escrita.
                 with open(nome_ficheiro, 'w') as arquivo:
@@ -466,7 +466,7 @@ def main():
                     arquivo.write("Lista de Utilizadores Ordenados por Reputação:\n")
 
                     # Itera sobre os utilizadores ordenados por reputação
-                    for utilizador in self.lista_de_utilizadores:
+                    for utilizador in self.utilizadores:
                         # Escreve as informações do utilizador no arquivo.
                         # Em '{self.calcular_reputacao(utilizador):.2f}': o 'f', significa que o número será formatado como um float (número decimal); e o '.2', especifica que queremos exibir apenas duas casas decimais, após o ponto decimal. O '\n' é para fazer uma quebra de linha.
                         arquivo.write(f"Nome: {utilizador.nome}, Reputação: {self.calcular_reputacao(utilizador):.2f} estrelas \n")
