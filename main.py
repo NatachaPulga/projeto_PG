@@ -194,6 +194,37 @@ def main():
 
 
 
+            # NOVO!!!!!!!!!!
+            # NOVO!!!!!!!!!! ----> ValueError: could not convert string to float: 'preço'
+            # NOVO!!!!!!!!!!
+            def registar_utilizador_ficheiro(self, nome_ficheiro):
+               with open(nome_ficheiro, "r", encoding='utf-8') as arquivo:
+                    linhas = arquivo.readlines()
+
+                    for linha in linhas:
+                        campos = linha.strip().split(';')
+                        if len(campos) == 3:
+                            nome = campos[0]
+                            interesses = campos[1][1:-1].split(',')
+                            artigos_info = campos[2][1:-1].split('&')
+
+                            artigos_disponiveis = []
+                            for artigo in artigos_info:
+                                info_artigo = artigo.split(',')
+                                if len(info_artigo) == 4:
+                                    nome_artigo = info_artigo[0]
+                                    preco = float(info_artigo[1])
+                                    tipologia = info_artigo[2]
+                                    quantidade = int(info_artigo[3])
+                                    novo_artigo = Artigo(nome_artigo, preco, tipologia, quantidade)
+                                    artigos_disponiveis.append(novo_artigo)
+
+                            novo_utilizador = Utilizador(nome, interesses, artigos_disponiveis)
+                            self.utilizadores.append(novo_utilizador)
+
+
+
+
             #Importa uma lista de utilizadores a partir de um ficheiro
             def importar_utilizadores(self, nome_ficheiro):
 
