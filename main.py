@@ -604,16 +604,35 @@ def main():
 
                         #  Se o utilizador escolher '1 - Registo manual'.
                         if escolha_registo == "1":
-                            # ...
+                            nome_utilizador = input("Digite o nome do utilizador: ")
+                            interesses_utilizador = input("Digite os interesses do utilizador (separados por vírgula): ")
+                            print("Os artigos disponíveis devem de ser escritos no formato seguinte: 'Nome, Preço, Tipologia, Quantidade', se quizer adicionar outro artigo deve de separa-lo com '&')")
+                            artigos_utilizador = input("Digite os artigos disponíveis (no formato 'Nome, Preço, Tipologia, Quantidade & Nome, Preço, Tipologia, Quantidade', separados por '&'): ")
+
+                            # Chama o método registar_utilizador com as informações fornecidas pelo usuário.
+                            feira.registar_utilizador(nome_utilizador, interesses_utilizador, artigos_utilizador)
+
+    
                             print("Registo manual criado com sucesso!")
                             break # Para voltar ao menu.
 
 
                          #  Se o utilizador escolher '2 - Registo por ficheiro'.
                         elif escolha_registo == "2":
-                            # ...
-                            print("Registo por ficheiro criado com sucesso!")
-                            break # Para voltar ao menu.
+                            # Tem de estar dentro do loop para se conseguir voltar a atrás.
+                            while True:
+                                nome_ficheiro = input("Insira o nome do ficheiro de utilizadores para importar: ")
+
+                                # Verifica se o nome do arquivo inserido termina com '.txt'.
+                                # 'endswith()' é um método usado para verificar se uma string termina com um sufixo específico, '(".txt")'. Ele retorna True se a string terminar com o sufixo especificado e False caso contrário.
+                                if nome_ficheiro.endswith(".txt"):
+                                    # Importa os utilizadores a partir do ficheiro especificado.
+                                    
+                                    feira.registar_utilizador_ficheiro(nome_ficheiro)
+                                    print("Registo por ficheiro criado com sucesso!")
+                                    break  # Para voltar ao menu.
+                                else:
+                                    print("Por favor, insira um nome de arquivo válido com a extensão '.txt'.")
 
 
                          #  Se o utilizador escolher 'V - Voltar atrás'.
@@ -625,11 +644,79 @@ def main():
 
                  # Se o utilizador escolher '2 - Alteração de um utilizador'.
                 elif escolha_utilizadores == "2":
-                    pass
+                    # Tem de estar dentro do loop para se conseguir voltar a atrás.
+                    while True:
+                        nome_utilizador = input("Insira o nome do utilizador: ")
+
+                        if nome_utilizador not in feira.utilizadores:
+                            print("Nome do utilizador inválido.")
+                            break
+                         #
+                        elif nome_utilizador in feira.utilizadores:
+                            print("Pretende aceder a:")
+                            print("1 - Editar interesses")
+                            print("2 - Editar artigos")
+                            print("V - Voltar atrás")
+
+                            escolha_edicao = input("Escolha uma opção: ")
+
+                            # Para garantir uma das escolhas pretendidas.
+                            while escolha_edicao not in ["1", "2", "V"]:
+                                print("Escolha entre:")
+                                print("1 - Editar interesses")
+                                print("2 - Editar artigos")
+                                print("V - Voltar atrás")
+
+                                escolha_edicao = input("Escolha uma opção: ")
+
+
+                            if escolha_edicao == "1":
+                                # Editar interesses do utilizador
+                                novos_interesses = input("Insira os novos interesses (separados por vírgula): ")
+                                nome_utilizador.editar_conta(novos_interesses.split(','))
+                                break
+                             #
+                            elif escolha_edicao == "2":
+                                print("Aqui estão seus artigos:")
+                                feira.mostrar_artigos_utilizador(nome_utilizador)
+
+                                nome_artigo = input("Insira o nome do artigo que deseja editar: ")
+
+                                if nome_artigo not in feira.mostrar_artigos_utilizador(nome_utilizador):
+                                    print("Artigo inválido.")
+                                    break
+                                 #
+                                elif nome_artigo in feira.mostrar_artigos_utilizador(nome_utilizador):
+                                    novo_nome = input("Novo nome do artigo: ")
+                                    novo_preco = int(input("Novo preço: "))
+                                    nova_tipologia = input("Nova tipologia: ")
+                                    nova_quantidade = int(input("Nova quantidade: "))
+                                    # Alterar.
+                                    nome_artigo.editar_nome(novo_nome)
+                                    nome_artigo.editar_preco(novo_preco)
+                                    nome_artigo.editar_tipo(nova_tipologia)
+                                    nome_artigo.editar_quantidade(nova_quantidade)
+                                    # Confirmação de alteração
+                                    print(f"Detalhes do artigo {nome_artigo.nome} foram atualizados:")
+                                    nome_artigo.mostrar_artigo()
+
+                                    break
+                                 #
+                            elif escolha_edicao == "3":
+                                    break  # Para voltar ao menu.
+                            
+
 
                  # Se o utilizador escolher '3 - Eliminação de conta de um utilizador'.
                 elif escolha_utilizadores == "3":
-                    pass
+                    # Tem de estar dentro do loop para se conseguir voltar a atrás.
+                    while True:
+                        nome_usuario = input("Digite o nome do utilizador que deseja eliminar: ")
+                        # Chama a função para eliminar o utilizador.
+                        feira.eliminar_conta(nome_usuario)
+                        break
+
+
 
                  # Se o utilizador escolher '4 - Lista de utilizadores'.
                 elif escolha_utilizadores == "4":
