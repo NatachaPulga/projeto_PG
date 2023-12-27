@@ -549,7 +549,7 @@ def main():
 
 
 
-
+    
 
 
 
@@ -735,8 +735,6 @@ def main():
                                  #
                             elif escolha_edicao == "3":
                                     break  # Para voltar ao menu.
-                            
-
 
                  # Se o utilizador escolher '3 - Eliminação de conta de um utilizador'.
                 elif escolha_utilizadores == "3":
@@ -747,23 +745,33 @@ def main():
                         feira.eliminar_conta(nome_usuario)
                         break
 
-
-
                  # Se o utilizador escolher '4 - Lista de utilizadores'.
                 elif escolha_utilizadores == "4":
-                    pass
+                    lista_utilizadores = feira.listar_utilizadores()
+                    print("Lista de Utilizadores: ")
+                    break
 
                  # Se o utilizador escolher '5 - Mostrar artigos de um utilizador'.
                 elif escolha_utilizadores == "5":
-                    pass
+                    nome_mostrar_artigos = input("Escreve o nome do utilizador para obter os seus artigos: ")
 
+                    feira.mostrar_artigos_utilizador(nome_mostrar_artigos)
+                    break
+                             
                  # Se o utilizador escolher '6 - Mostrar interesses de um utilizador'.
                 elif escolha_utilizadores == "6":
-                    pass
+                    nome_mostrar_interesses = input("Escreve o nome do utilizador para obter os seus interesses: ")
+                    
+                    feira.mostrar_interesses_utilizador(nome_mostrar_interesses)
+                    break
+                    
 
                  # Se o utilizador escolher '7 - Mostrar Pycoins de um utilizador'.
                 elif escolha_utilizadores == "7":
-                    pass
+                    nome_mostrar_pycoins = input("Escreve o nome do utilizador para saber a quantidade de Pycoins: ")
+                    
+                    feira.mostrar_pycoins_utilizador(nome_mostrar_pycoins)
+                    break
 
                  # Se o utilizador escolher 'V - Voltar atrás'.
                 elif escolha_utilizadores.upper() == "V":
@@ -883,7 +891,9 @@ def main():
                     return  # Para encerra o programa.
 
 
+    main()
 
+main()
 
 
 
