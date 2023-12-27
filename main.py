@@ -1,6 +1,5 @@
-def main():
-    # Funcionalidades relativas a um utilizador
-    class Utilizador:
+# Funcionalidades relativas a um utilizador
+class Utilizador:
             #Construtor
             def __init__(self, nome, interesses, artigos_disponiveis):
                 self.nome = nome
@@ -83,8 +82,8 @@ def main():
 
 
 
-    #Funcionalidades relativas a um artigo
-    class Artigo:
+#Funcionalidades relativas a um artigo
+class Artigo:
         #Construtor
             def __init__(self, nome, preco, tipologia, quantidade):
                 self.nome = nome
@@ -153,8 +152,8 @@ def main():
 
 
 
-    #Gestão da feira, avaliações e negociação automática
-    class FeiraVirtual:
+#Gestão da feira, avaliações e negociação automática
+class FeiraVirtual:
             #Construtor
             def __init__(self):
                 # Iniciar listas vazias.
@@ -318,7 +317,6 @@ def main():
 
             #Apresenta todos os artigos disponíveis ordenados por preço
             def listar_artigos(self):
-
                 #Devolve a lista de artigos de todos os utilizadores
                 lista_completa_artigos = self.devolve_lista_completa_artigos()
 
@@ -331,9 +329,7 @@ def main():
                     artigos_ordem = sorted(lista_completa_artigos, key=lambda x: x.preco)
                     
                     for artigo in artigos_ordem:
-                        print(f"{artigo.nome}, Preço: {artigo.preco}")
-                        
-                
+                        print(f"{artigo.nome}, Preço: {artigo.preco}")     
 
             #Efetua uma compra de um artigo. O comprador e o vendedor são os nomes de dois utilizadores registados
             def comprar_artigo(self, comprador, vendedor, artigo):
@@ -514,8 +510,8 @@ def main():
 
 
 
-    # Gestão da lista de artigos disponíveis na feira
-    class Mercado:
+# Gestão da lista de artigos disponíveis na feira
+class Mercado:
             #Construtor
             def __init__(self):
                 # Inicia a lista de artigos vazia.
@@ -556,13 +552,14 @@ def main():
 
 
 
+# Para criar uma instancia de FeiraVirtual
+feira = FeiraVirtual()
 
+# Iniciar programa
+def main():
 
-
-    # Iniciar programa.
-    def main():
-        # Para a class 'FeiraVirtual' funcionar.
-        feira = FeiraVirtual() 
+    #Para não terminar o programa
+    while True:
 
         print("Bem-vindo/a à Feira Virtual. Pretende aceder a:")
         print("1 - Utilizadores")
@@ -891,16 +888,17 @@ def main():
                     return  # Para encerra o programa.
 
 
+
+
+
+if __name__ == '__main__':
     main()
 
-main()
 
 
 
 
     
-
-
     ###### Testes
 
     # feira_virtual = FeiraVirtual()
@@ -966,39 +964,4 @@ main()
 
 
 # diversão começa quando os utilizadores descobrem que certos artigos têm valores de 
-#mercado que podem variar com base na oferta e procura
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-if __name__ == '__main__':
-    main()
-
-
-
-#
-#dados = [5, 1, 4, 2, 3, 4, 5, 2, 6, 5]
-
-#frequencia = [0 for i in range(len(dados))] 
-
-#for num in dados: 
-
-#       frequencia[num-1] += 1 
-
-#max_freq = max(frequencia)
-
-#print(max_freq)
-
+# mercado que podem variar com base na oferta e procura
