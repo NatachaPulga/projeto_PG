@@ -185,7 +185,7 @@ class FeiraVirtual:
                     #Enquanto o nome existir, é gerado um novo
                     while user_existe == 1: 
                         numero_aleatorio = ''.join(str(random.randint(0, 9)) for _ in range(5)) # Cria uma cadeia de 5 números aleatórios entre 0 e 9
-                        nome = nome_utilizador + numero_aleatorio # Novo nome = nome_utilizador_NUMEROS_RANDOM
+                        nome = nome_utilizador + numero_aleatorio # Novo nome = nome_utilizadorNUMEROS_RANDOM
                         user_existe = self.verifica_existencia_utilizador(nome)
                     return nome
 
@@ -1105,5 +1105,4 @@ if __name__ == '__main__':
 
 # diversão começa quando os utilizadores descobrem que certos artigos têm valores de 
 # mercado que podem variar com base na oferta e procura
-    
     
