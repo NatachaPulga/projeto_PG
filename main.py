@@ -200,7 +200,8 @@ class FeiraVirtual:
                with open(nome_ficheiro, "r", encoding='utf-8') as arquivo:
                     linhas = arquivo.readlines()
 
-                    for linha in linhas:
+                    #Avança para processar apenas a partir da linha seguinte ao header
+                    for linha in linhas[1:]: 
                         campos = linha.strip().split(';')
                         if len(campos) == 3:
                             nome = campos[0]
@@ -1030,3 +1031,4 @@ if __name__ == '__main__':
 
 # diversão começa quando os utilizadores descobrem que certos artigos têm valores de 
 # mercado que podem variar com base na oferta e procura
+    
