@@ -1,3 +1,5 @@
+import random
+
 # Funcionalidades relativas a um utilizador
 class Utilizador:
             #Construtor
@@ -162,7 +164,32 @@ class FeiraVirtual:
                 self.avaliacoes = []
         
         
-            #!!!! A FAZER: Requisito nome de utilizador único -> verifica se o nome já existe. se existir, concatena "_1" e verifica novamente se existe
+            #Verifica se o utilizador existe na lista de utilizadores. Se existir, retorna 1. Caso contrário, retorna 0.
+            def verifica_existencia_utilizador(self, nome_utilizador):
+                for utilizador in self.utilizadores:
+                    if utilizador.nome == nome_utilizador:
+                        return 1
+                else:
+                    return 0
+                
+            #Gera nome unico de utilizador
+            def gera_nome_utilizador_unico(self, nome_utilizador):
+                user_existe = self.verifica_existencia_utilizador(nome_utilizador)
+                
+                #Nome ainda não existe, retorna o nome original
+                if user_existe == 0:
+                    return nome_utilizador
+                #Será gerado um novo nome 
+                else:
+                    print(f"O nome de utilizador {nome_utilizador} já existe.")
+                    #Enquanto o nome existir, é gerado um novo
+                    while user_existe == 1: 
+                        numero_aleatorio = ''.join(str(random.randint(0, 9)) for _ in range(5)) # Cria uma cadeia de 5 números aleatórios entre 0 e 9
+                        nome = nome_utilizador + numero_aleatorio # Novo nome = nome_utilizador_NUMEROS_RANDOM
+                        user_existe = self.verifica_existencia_utilizador(nome)
+                    return nome
+
+                        
             #!!!! A VALIDAR: Quando é que se ajusta preço de um artigo? quando é criado o utilizador?
 
             #Adiciona um novo utilizador recebendo o nome, interesses e artigos
@@ -186,10 +213,11 @@ class FeiraVirtual:
                     novo_artigo = Artigo(artigo[0], int(artigo[1]), artigo[2], int(artigo[3])) #artigo[0] corresponde ao nome, artigo[1] é o preço, artigo[2] é a tipologia e artigo[3] a quantidade
                     artigos_utilizador.append(novo_artigo)
 
-                novo_utilizador = Utilizador(nome, interesses, artigos_utilizador)
+                nome_utilizador = self.gera_nome_utilizador_unico(nome)
+                novo_utilizador = Utilizador(nome_utilizador, interesses, artigos_utilizador)
                 self.utilizadores.append(novo_utilizador)
 
-                print(f"O utilizador {nome} foi registado na Feira Virtual.")
+                print(f"O utilizador {nome_utilizador} foi registado na Feira Virtual.")
 
 
 
@@ -219,7 +247,15 @@ class FeiraVirtual:
                                     novo_artigo = Artigo(nome_artigo, preco, tipologia, quantidade)
                                     artigos_disponiveis.append(novo_artigo)
 
-                            novo_utilizador = Utilizador(nome, interesses, artigos_disponiveis)
+
+                            #Gera um nome de utilizador unico
+                            nome_utilizador = self.gera_nome_utilizador_unico(nome)
+                        
+                            if nome_utilizador != nome: 
+                                print(f"O utilizador {nome} foi importado com o nome {nome_utilizador}.") # Informa a atualizacao do nome
+
+                            #Cria o novo utilizador e adiciona à lista
+                            novo_utilizador = Utilizador(nome_utilizador, interesses, artigos_disponiveis)
                             self.utilizadores.append(novo_utilizador)
 
 
@@ -256,8 +292,14 @@ class FeiraVirtual:
                             novo_artigo = Artigo(artigo[0], int(artigo[1]), artigo[2], int(artigo[3])) #artigo[0] corresponde ao nome, artigo[1] é o preço, artigo[2] é a tipologia e artigo[3] a quantidade
                             artigos_utilizador.append(novo_artigo)
 
+                        #Gera um nome de utilizador unico
+                        nome_final_utilizador = self.gera_nome_utilizador_unico(nome_utilizador)
+                        
+                        if nome_final_utilizador != nome_utilizador: 
+                            print(f"O utilizador {nome_utilizador} foi importado com o nome {nome_final_utilizador}.") # Informa a atualizacao do nome
+
                         #Cria o novo utilizador e adiciona à lista
-                        novo_utilizador = Utilizador(nome_utilizador, interesses_utilizador, artigos_utilizador)
+                        novo_utilizador = Utilizador(nome_final_utilizador, interesses_utilizador, artigos_utilizador)
                         self.utilizadores.append(novo_utilizador)
                             
                     print(f"O ficheiro {nome_ficheiro} foi importado com sucesso.")
@@ -683,7 +725,8 @@ def main():
                             # 'endswith()' é um método usado para verificar se uma string termina com um sufixo específico, '(".txt")'. Ele retorna True se a string terminar com o sufixo especificado e False caso contrário.
                             if nome_ficheiro.endswith(".txt"):
                                 # Importa os utilizadores a partir do ficheiro especificado.
-                                    
+
+                                #feira.importar_utilizadores(nome_ficheiro)   
                                 feira.registar_utilizador_ficheiro(nome_ficheiro)
                                 print("Registo por ficheiro criado com sucesso!")
                                 break  # Para voltar ao menu.
@@ -1062,4 +1105,5 @@ if __name__ == '__main__':
 
 # diversão começa quando os utilizadores descobrem que certos artigos têm valores de 
 # mercado que podem variar com base na oferta e procura
+    
     
