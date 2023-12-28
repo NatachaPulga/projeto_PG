@@ -146,7 +146,7 @@ class Artigo:
                 if not self.tipologia:
                     print(f"A tipologia do artigo {self.nome} não se encontra definida.")
                 else:
-                    print(f"A tipologia do artigo {self.nome} é {self.tipologia}")
+                    print(f"A tipologia do artigo {self.nome} é {self.tipologia}.")
 
 
 
@@ -331,6 +331,34 @@ class FeiraVirtual:
                     
                     for artigo in artigos_ordem:
                         print(f"{artigo.nome}, Preço: {artigo.preco}")     
+
+
+            def mostrar_preco_artigo(self, nome_artigo):
+                #Devolve a lista de artigos de todos os utilizadores
+                lista_completa_artigos = self.devolve_lista_completa_artigos()
+
+                for artigo in lista_completa_artigos:
+                    if nome_artigo == artigo.nome:
+                        artigo.mostrar_preco()
+
+
+            def mostrar_quantidade_artigo(self, nome_artigo):
+               #Devolve a lista de artigos de todos os utilizadores
+               lista_completa_artigos = self.devolve_lista_completa_artigos()
+
+               for artigo in lista_completa_artigos:
+                   if nome_artigo == artigo.nome:
+                       artigo.mostrar_quantidade()
+
+            def mostrar_tipo_artigo(self, nome_artigo):
+                #Devolve a lista de artigos de todos os utilizadores
+                lista_completa_artigos = self.devolve_lista_completa_artigos()
+
+                for artigo in lista_completa_artigos:
+                    if nome_artigo == artigo.nome:
+                        artigo.mostrar_tipo()
+
+
 
             #Efetua uma compra de um artigo. O comprador e o vendedor são os nomes de dois utilizadores registados
             def comprar_artigo(self, comprador, vendedor, artigo):
@@ -740,8 +768,8 @@ def main():
 
                  # Se o utilizador escolher '4 - Lista de utilizadores'.
                 elif escolha_utilizadores == "4":
-                    lista_utilizadores = feira.listar_utilizadores()
                     print("Lista de Utilizadores: ")
+                    lista_utilizadores = feira.listar_utilizadores()
                     break
 
                  # Se o utilizador escolher '5 - Mostrar artigos de um utilizador'.
@@ -789,7 +817,6 @@ def main():
                 print("1 - Mostrar preço de um artigo")
                 print("2 - Mostrar quantidade de um artigo")
                 print("3 - Mostrar tipo de um artigo")
-                print("4 - Importar Artigos")
                 print("V - Voltar atrás")
                 print("S - Sair")
 
@@ -801,7 +828,6 @@ def main():
                     print("1 - Mostrar preço de um artigo")
                     print("2 - Mostrar quantidade de um artigo")
                     print("3 - Mostrar tipo de um artigo")
-                    print("4 - Importar Artigos")
                     print("V - Voltar atrás")
                     print("S - Sair")
 
@@ -809,19 +835,24 @@ def main():
 
                 # Se o utilizador escolher '1 - Mostrar preço de um artigo'.
                 if escolha_artigos == "1":
-                    pass
+                    nome_mostrar_preco = input("Escreve o nome do artigo para obter o seu preço: ")
+
+                    feira.mostrar_preco_artigo(nome_mostrar_preco)
+                    break
 
                  # Se o utilizador escolher '2 - Mostrar quantidade de um artigo'.
                 elif escolha_artigos == "2":
-                    pass
+                    nome_mostrar_artigo = input("Escreve o nome do artigo para obter a quantidade: ")
+
+                    feira.mostrar_quantidade_artigo(nome_mostrar_artigo)
+                    break
                  
                  # Se o utilizador escolher '3 - Mostrar tipo de um artigo'.
                 elif escolha_artigos == "3":
-                    pass
+                    nome_mostrar_tipo = input("Escreve o nome do artigo para obter a tipologia: ")
 
-                 # Se o utilizador escolher '4 - Importar Artigos'.
-                elif escolha_artigos == "4":
-                    pass
+                    feira.mostrar_tipo_artigo(nome_mostrar_tipo)
+                    break
                  
                   # Se o utilizador escolher 'V - Voltar atrás'.
                 elif escolha_artigos.upper() == "V":
