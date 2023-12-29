@@ -771,29 +771,38 @@ def main():
                      #
                     elif verifica_utilizador == 1:
                         print("Pretende aceder a:")
-                        print("1 - Editar interesses")
-                        print("2 - Editar artigos")
+                        print("1 - Editar nome")
+                        print("2 - Editar interesses")
+                        print("3 - Editar artigos")
                         print("V - Voltar atrás")
 
                         escolha_edicao = input("Escolha uma opção: ")
+                        # Convertendo a letra minúscula para maiúscula
+                        escolha_edicao = escolha_edicao.upper()
 
                         # Para garantir uma das escolhas pretendidas.
-                        while escolha_edicao not in ["1", "2", "V"]:
+                        while escolha_edicao not in ["1", "2", "3", "V"]:
                             print("Escolha entre:")
-                            print("1 - Editar interesses")
-                            print("2 - Editar artigos")
+                            print("1 - Editar nome")
+                            print("2 - Editar interesses")
+                            print("3 - Editar artigos")
                             print("V - Voltar atrás")
 
                             escolha_edicao = input("Escolha uma opção: ")
+                            # Convertendo a letra minúscula para maiúscula
+                            escolha_edicao = escolha_edicao.upper()
 
 
                         if escolha_edicao == "1":
+                            pass
+                         #
+                        elif escolha_edicao == "2":
                             # Editar interesses do utilizador
                             novos_interesses = input("Insira os novos interesses (separados por vírgula): ")
                             nome_utilizador.editar_conta(novos_interesses.split(','))
                             break
                          #
-                        elif escolha_edicao == "2":
+                        elif escolha_edicao == "3":
                             print("Aqui estão seus artigos:")
                             feira.mostrar_artigos_utilizador(nome_utilizador)
 
@@ -819,7 +828,7 @@ def main():
 
                                 break
                              #
-                            elif escolha_edicao == "3":
+                            elif escolha_edicao == "V":
                                 break  # Para voltar ao menu.
 
                  # Se o utilizador escolher '3 - Eliminação de conta de um utilizador'.
