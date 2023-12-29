@@ -80,6 +80,15 @@ class Utilizador:
                 print(f"O artigo {artigo.nome} foi eliminado da Feira Virtual.")
 
 
+            # NOVA FUNÇÃO!
+            def verifica_existencia_artigo(self, nome_artigo):
+                for artigo in self.artigos_disponiveis:
+                    if artigo.nome == nome_artigo:
+                        return 1
+                else:
+                    return 0
+
+
 
 
 
@@ -914,9 +923,18 @@ def main():
 
          # Se o utilizador escolher '3 - Mercado'.
         elif escolha == "3":
-            # Tem de estar dentro do loop para se conseguir voltar a atrás.
-            while True:
-                print("Pretende aceder a:")
+            print("Pretende aceder a:")
+            print("1 - Adicionar Artigo ao Mercado")
+            print("2 - Remover Artigo do Mercado")
+            print("3 - Listar Artigos do Mercado")
+            print("V - Voltar atrás")
+            print("S - Sair")
+
+            escolha_mercado = input(" ")
+
+            # Para garantir uma das escolhas pretendidas.
+            while escolha_mercado.upper() not in ["1", "2", "3", "V", "S"]:
+                print("Escolha entre:")
                 print("1 - Adicionar Artigo ao Mercado")
                 print("2 - Remover Artigo do Mercado")
                 print("3 - Listar Artigos do Mercado")
@@ -925,115 +943,104 @@ def main():
 
                 escolha_mercado = input(" ")
 
-                # Para garantir uma das escolhas pretendidas.
-                while escolha_mercado.upper() not in ["1", "2", "3", "V", "S"]:
-                    print("Escolha entre:")
-                    print("1 - Adicionar Artigo ao Mercado")
-                    print("2 - Remover Artigo do Mercado")
-                    print("3 - Listar Artigos do Mercado")
-                    print("V - Voltar atrás")
-                    print("S - Sair")
-
-                    escolha_mercado = input(" ")
-
-                # Se o utilizador escolher '1 - Adicionar Artigo ao Mercado'.
-                if escolha_mercado == "1":
-                    nome_utilizador = input("Digite o nome do utilizador: ")
+            # Se o utilizador escolher '1 - Adicionar Artigo ao Mercado'.
+            if escolha_mercado == "1":
+                nome_utilizador = input("Digite o nome do utilizador: ")
             
-                    # Verifica se o usuário está registrado na Feira Virtual.
-                    verifica_utilizador = feira.verifica_existencia_utilizador(nome_utilizador)
+                # Verifica se o usuário está registrado na Feira Virtual.
+                verifica_utilizador = feira.verifica_existencia_utilizador(nome_utilizador)
 
-                    if verifica_utilizador == 0:
-                        print("Utilizador não encontrado.")
-                        break
-                     #
-                    elif verifica_utilizador == 1:
-                        print("Utilizador encontrado.")
+                if verifica_utilizador == 0:
+                    print("Utilizador não encontrado.")
+                    break
+                 #
+                elif verifica_utilizador == 1:
+                    print("Utilizador encontrado.")
 
-                        print("Adicionar novo artigo.")
-                        nome_artigo = input("Nome do artigo: ")
-                        preco_artigo = float(input("Preço do artigo: "))
-                        tipologia_artigo = input("Tipologia do artigo: ")
-                        quantidade_artigo = int(input("Quantidade do artigo: "))
-
-
-                        # ERRO ERRO ERRO!!!!
-
-                        # Cria o objeto de artigo com as informações fornecidas.
-                        novo_artigo = Artigo(nome_artigo, preco_artigo, tipologia_artigo, quantidade_artigo)
-
-                        # Adiciona o artigo ao mercado do utilizador na Feira Virtual.
-                        feira.utilizadores[nome_utilizador].mercado.adicionar_artigo(novo_artigo)
-                        print("Artigo adicionado ao mercado com sucesso!")
-                        break
+                    print("Adicionar novo artigo.")
+                    nome_artigo = input("Nome do artigo: ")
+                    preco_artigo = float(input("Preço do artigo: "))
+                    tipologia_artigo = input("Tipologia do artigo: ")
+                    quantidade_artigo = int(input("Quantidade do artigo: "))
 
 
-                 # Se o utilizador escolher '2 - Remover Artigo do Mercado'.
-                elif escolha_mercado == "2":
-                    nome_utilizador = input("Digite o nome do utilizador: ")
+                    # ERRO ERRO ERRO!!!!
+
+                    # Cria o objeto de artigo com as informações fornecidas.
+                    novo_artigo = Artigo(nome_artigo, preco_artigo, tipologia_artigo, quantidade_artigo)
+
+                    # Adiciona o artigo ao mercado do utilizador na Feira Virtual.
+                    feira.utilizadores[nome_utilizador].mercado.adicionar_artigo(novo_artigo)
+                    print("Artigo adicionado ao mercado com sucesso!")
+                    break
+
+
+             # Se o utilizador escolher '2 - Remover Artigo do Mercado'.
+            elif escolha_mercado == "2":
+                nome_utilizador = input("Digite o nome do utilizador: ")
             
-                    # Verifica se o usuário está registrado na Feira Virtual.
-                    verifica_utilizador = feira.verifica_existencia_utilizador(nome_utilizador)
+                # Verifica se o usuário está registrado na Feira Virtual.
+                verifica_utilizador = feira.verifica_existencia_utilizador(nome_utilizador)
 
-                    # Verifica se o usuário está registrado na Feira Virtual.
-                    if verifica_utilizador == 0:
-                        print("Utilizador não encontrado.")
-                        break
-                    elif verifica_utilizador == 1:
-                        print("Utilizador encontrado.")
+                # Verifica se o usuário está registrado na Feira Virtual.
+                if verifica_utilizador == 0:
+                    print("Utilizador não encontrado.")
+                    break
+                elif verifica_utilizador == 1:
+                    print("Utilizador encontrado.")
 
-                        # Mostra os artigos do mercado do utilizador
-                        feira.utilizadores[nome_utilizador].mercado.listar_artigos()
+                    # Mostra os artigos do mercado do utilizador
+                    feira.mostrar_artigos_utilizador(nome_utilizador)
 
-                        nome_artigo = input("Insira o nome do artigo que deseja remover: ")
+                    nome_artigo = input("Insira o nome do artigo que deseja remover: ")
 
-                        # Verifica se o artigo está no mercado do utilizador
-                        if nome_artigo not in feira.utilizadores[nome_utilizador].mercado.listar_artigos():
-                            print("O artigo especificado não foi encontrado no mercado do utilizador.")
+                    # Verifica se o artigo está no mercado do utilizador
+                    utilizador = None
+                    for user in feira.utilizadores:
+                        if user.nome == nome_utilizador:
+                            utilizador = user
                             break
-                        #
-                        # Procura pelo artigo com o nome especificado no mercado do utilizador
-                        elif nome_artigo in feira.utilizadores[nome_utilizador].mercado.listar_artigos():
-                            artigo_a_remover = None
-                            for artigo in feira.utilizadores[nome_utilizador].mercado.artigos:
+
+                    if utilizador is not None:
+                        verifica_artigo = utilizador.verifica_existencia_artigo(nome_artigo)
+
+                        if verifica_artigo == 0:
+                            print("O artigo especificado não foi encontrado no mercado do utilizador.")
+                        elif verifica_artigo == 1:
+                            # Remove o artigo do mercado do utilizador na Feira Virtual
+                            for artigo in utilizador.artigos_disponiveis:
                                 if artigo.nome == nome_artigo:
-                                    artigo_a_remover = artigo
+                                    utilizador.remover_artigo(artigo)
+                                    print("Artigo removido com sucesso!")
                                     break
 
-                            # Remove o artigo do mercado do utilizador na Feira Virtual
-                            feira.utilizadores[nome_utilizador].mercado.remover_artigo(artigo_a_remover)
-                            print("Artigo removido com sucesso!")
-                            break
+             # Se o utilizador escolher '3 - Listar Artigos do Mercado'.
+            elif escolha_mercado == "3":
+                    feira.listar_artigos()
+                    break
 
 
-                 # Se o utilizador escolher '3 - Listar Artigos do Mercado'.
-                elif escolha_mercado == "3":
-                        feira.listar_artigos()
-                        break
+             #  Se o utilizador escolher 'V - Voltar atrás'.
+            elif escolha_mercado.upper() == "V":
+                break  # Para voltar ao menu.
 
-
-                 #  Se o utilizador escolher 'V - Voltar atrás'.
-                elif escolha_mercado.upper() == "V":
-                    break  # Para voltar ao menu.
-
-                 #  Se o utilizador escolher 'S - Sair'.
-                elif escolha_mercado.upper() == "S":
-                    print("Obrigado por usar a Feira Virtual. Até logo!")
-                    return  # Para encerra o programa.
+             #  Se o utilizador escolher 'S - Sair'.
+            elif escolha_mercado.upper() == "S":
+                print("Obrigado por usar a Feira Virtual. Até logo!")
+                return  # Para encerra o programa.
 
 
 
 
 
-if __name__ == '__main__':
-    main()
+main()
 
 
 
 
 
     
-    ###### Testes
+###### Testes
 
     # feira_virtual = FeiraVirtual()
 
