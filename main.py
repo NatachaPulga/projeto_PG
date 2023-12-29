@@ -221,9 +221,7 @@ class FeiraVirtual:
 
 
 
-            # NOVO!!!!!!!!!!
-            # NOVO!!!!!!!!!! ----> ValueError: could not convert string to float: 'preço'
-            # NOVO!!!!!!!!!!
+            # Adicionar um(uns) novo(s) utilizador(es) por ficheiro. 
             def registar_utilizador_ficheiro(self, nome_ficheiro):
                with open(nome_ficheiro, "r", encoding='utf-8') as arquivo:
                     linhas = arquivo.readlines()
@@ -706,7 +704,7 @@ def main():
                         nome_utilizador = input("Digite o nome do utilizador: ")
                         interesses_utilizador = input("Digite os interesses do utilizador (separados por vírgula): ")
                         print("Os artigos disponíveis devem de ser escritos no formato seguinte: 'Nome, Preço, Tipologia, Quantidade', se quizer adicionar outro artigo deve de separa-lo com '&')")
-                        artigos_utilizador = input("Digite os artigos disponíveis (no formato 'Nome, Preço, Tipologia, Quantidade & Nome, Preço, Tipologia, Quantidade', separados por '&'): ")
+                        artigos_utilizador = input("Digite os artigos disponíveis: ")
 
                         # Chama o método registar_utilizador com as informações fornecidas pelo usuário.
                         feira.registar_utilizador(nome_utilizador, interesses_utilizador, artigos_utilizador)
@@ -742,13 +740,16 @@ def main():
 
                  # Se o utilizador escolher '2 - Alteração de um utilizador'.
                 elif escolha_utilizadores == "2":
-                    nome_utilizador = input("Insira o nome do utilizador: ")
+                    nome_utilizador = input("Digite o nome do utilizador: ")
+            
+                    # Verifica se o usuário está registrado na Feira Virtual.
+                    verifica_utilizador = feira.verifica_existencia_utilizador(nome_utilizador)
 
-                    if nome_utilizador not in feira.utilizadores:
+                    if verifica_utilizador == 0:
                         print("Nome do utilizador inválido.")
                         break
                      #
-                    elif nome_utilizador in feira.utilizadores:
+                    elif verifica_utilizador == 1:
                         print("Pretende aceder a:")
                         print("1 - Editar interesses")
                         print("2 - Editar artigos")
@@ -940,23 +941,31 @@ def main():
                     nome_utilizador = input("Digite o nome do utilizador: ")
             
                     # Verifica se o usuário está registrado na Feira Virtual.
-                    if nome_utilizador not in feira.utilizadores:
+                    verifica_utilizador = feira.verifica_existencia_utilizador(nome_utilizador)
+
+                    if verifica_utilizador == 0:
                         print("Utilizador não encontrado.")
                         break
+                     #
+                    elif verifica_utilizador == 1:
+                        print("Utilizador encontrado.")
 
-                    print("Adicionar novo artigo:")
-                    nome_artigo = input("Nome do artigo: ")
-                    preco_artigo = float(input("Preço do artigo: "))
-                    tipologia_artigo = input("Tipologia do artigo: ")
-                    quantidade_artigo = int(input("Quantidade do artigo: "))
+                        print("Adicionar novo artigo.")
+                        nome_artigo = input("Nome do artigo: ")
+                        preco_artigo = float(input("Preço do artigo: "))
+                        tipologia_artigo = input("Tipologia do artigo: ")
+                        quantidade_artigo = int(input("Quantidade do artigo: "))
 
-                    # Cria o objeto de artigo com as informações fornecidas.
-                    novo_artigo = Artigo(nome_artigo, preco_artigo, tipologia_artigo, quantidade_artigo)
 
-                    # Adiciona o artigo ao mercado do utilizador na Feira Virtual.
-                    feira.utilizadores[nome_utilizador].mercado.adicionar_artigo(novo_artigo)
-                    print("Artigo adicionado ao mercado com sucesso!")
-                    break
+                        # ERRO ERRO ERRO!!!!
+
+                        # Cria o objeto de artigo com as informações fornecidas.
+                        novo_artigo = Artigo(nome_artigo, preco_artigo, tipologia_artigo, quantidade_artigo)
+
+                        # Adiciona o artigo ao mercado do utilizador na Feira Virtual.
+                        feira.utilizadores[nome_utilizador].mercado.adicionar_artigo(novo_artigo)
+                        print("Artigo adicionado ao mercado com sucesso!")
+                        break
 
 
                  # Se o utilizador escolher '2 - Remover Artigo do Mercado'.
