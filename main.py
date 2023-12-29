@@ -89,6 +89,11 @@ class Utilizador:
                     return 0
 
 
+            # Ober artigos disponiveis de um utilizador.
+            def obter_artigos_disponiveis(self):
+                return self.artigos_disponiveis
+
+
 
 
 
@@ -582,6 +587,14 @@ class FeiraVirtual:
                 print(f"Lista de utilizadores ordenada por reputação exportada para '{nome_ficheiro}' com sucesso.")
 
 
+            # Recuperar artigos de um usuário.
+            def obter_artigos_utilizador(self, nome):
+                for utilizador in self.utilizadores:
+                    if nome == utilizador.nome:
+                        return utilizador.obter_artigos_disponiveis()
+                return None  # Retornar None se o usuário não for encontrado
+
+
 
             #Início da feira. O grupo deve apresentar testes do projeto nesta função
             def main():
@@ -791,19 +804,31 @@ def main():
                             # Editar interesses do utilizador
                             novos_interesses = input("Insira os novos interesses (separados por vírgula): ")
                             nome_utilizador.editar_conta(novos_interesses.split(','))
+
+                             # ERRO ERRO EROO
+
                             break
                          #
                         elif escolha_edicao == "2":
-                            print("Aqui estão seus artigos:")
                             feira.mostrar_artigos_utilizador(nome_utilizador)
+
+                            artigos_utilizador = feira.obter_artigos_utilizador(nome_utilizador)
+
 
                             nome_artigo = input("Insira o nome do artigo que deseja editar: ")
 
-                            if nome_artigo not in feira.mostrar_artigos_utilizador(nome_utilizador):
+                            # Verifique se o nome do artigo inserido é válido para edição
+                            artigo_encontrado = None
+                            for artigo in artigos_utilizador:
+                                if nome_artigo == artigo.nome:
+                                    artigo_encontrado = artigo
+                                    break
+
+                            if artigo_encontrado is None:
                                 print("Artigo inválido.")
                                 break
                              #
-                            elif nome_artigo in feira.mostrar_artigos_utilizador(nome_utilizador):
+                            else:
                                 novo_nome = input("Novo nome do artigo: ")
                                 novo_preco = int(input("Novo preço: "))
                                 nova_tipologia = input("Nova tipologia: ")
@@ -813,14 +838,13 @@ def main():
                                 nome_artigo.editar_preco(novo_preco)
                                 nome_artigo.editar_tipo(nova_tipologia)
                                 nome_artigo.editar_quantidade(nova_quantidade)
-                                # Confirmação de alteração
-                                print(f"Detalhes do artigo {nome_artigo.nome} foram atualizados:")
-                                nome_artigo.mostrar_artigo()
-
+                                
+                                    # ERRO ERRO EROO
+                                
                                 break
-                             #
-                            elif escolha_edicao == "3":
-                                break  # Para voltar ao menu.
+                         #
+                        elif escolha_edicao == "3":
+                            break  # Para voltar ao menu.
 
                  # Se o utilizador escolher '3 - Eliminação de conta de um utilizador'.
                 elif escolha_utilizadores == "3":
