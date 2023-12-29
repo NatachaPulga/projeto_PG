@@ -983,15 +983,17 @@ def main():
                         tipologia_artigo = input("Tipologia do artigo: ")
                         quantidade_artigo = int(input("Quantidade do artigo: "))
 
-
-                        # ERRO ERRO ERRO!!!!
-
-                        # Cria o objeto de artigo com as informações fornecidas.
+                        # Cria o objeto de artigo com as informações fornecidas
                         novo_artigo = Artigo(nome_artigo, preco_artigo, tipologia_artigo, quantidade_artigo)
 
-                        # Adiciona o artigo ao mercado do utilizador na Feira Virtual.
-                        utilizador.mercado.adicionar_artigo(novo_artigo)
-                        print("Artigo adicionado ao mercado com sucesso!")
+                        # Adiciona o artigo ao mercado do utilizador na Feira Virtual
+                        utilizador = None
+                        for user in feira.utilizadores:
+                            if user.nome == nome_utilizador:
+                                user.artigos_disponiveis.append(novo_artigo)
+                                break
+                        
+                        print(f"Artigo adicionado ao mercado de {nome_utilizador} com sucesso!")
                         break
 
 
@@ -1126,4 +1128,4 @@ main()
 
 # diversão começa quando os utilizadores descobrem que certos artigos têm valores de 
 # mercado que podem variar com base na oferta e procura
-    
+
