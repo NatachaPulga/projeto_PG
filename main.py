@@ -980,6 +980,8 @@ def main():
                         print("Utilizador não encontrado.")
                         break
                     elif verifica_utilizador == 1:
+                        print("Utilizador encontrado.")
+
                         # Mostra os artigos do mercado do utilizador
                         feira.utilizadores[nome_utilizador].mercado.listar_artigos()
 
