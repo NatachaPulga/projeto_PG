@@ -180,6 +180,8 @@ class FeiraVirtual:
                 self.utilizadores = []
                 self.artigos = []
                 self.avaliacoes = []
+                # Inicialização de variáveis necessárias
+                self.interesses = []
         
         
             #Verifica se o utilizador existe na lista de utilizadores. Se existir, retorna 1. Caso contrário, retorna 0.
@@ -603,6 +605,19 @@ class FeiraVirtual:
                 return None  # Retorna None se o utilizador não for encontrado
 
 
+            # Editar interesses.
+            def editar_interesse_utilizador(self, nome_utilizador, nome_interesse, novo_interesse):
+                    # Obter os interesses do utilizador
+                    interesses_utilizador = self.obter_interesses_utilizador(nome_utilizador)
+
+                    # Verificar se o interesse a ser editado está na lista de interesses do utilizador
+                    if nome_interesse in interesses_utilizador:
+                        # Remover o interesse antigo e adicionar os novos interesses
+                        interesses_utilizador.remove(nome_interesse)
+                        novos_interesses = [interesse.strip() for interesse in novo_interesse.split(',')]
+                        interesses_utilizador.extend(novos_interesses)
+
+
             #Início da feira. O grupo deve apresentar testes do projeto nesta função
             def main():
                 pass
@@ -826,9 +841,11 @@ def main():
                                 break
                              #
                             else:
-
-
-                                        # ERRO ERRO EROO
+                                novo_interesse = input("Novo(s) interesse(s) (separe os interesses por ','): ")
+                                # Aqui chamamos a função para editar o interesse do utilizador
+                                feira.editar_interesse_utilizador(nome_utilizador, nome_interesse, novo_interesse)
+                                
+                                print("Interesses do utilizador atualizados.")
 
                                 break
                          #
