@@ -117,7 +117,6 @@ class Artigo:
             #Altera o nome de um artigo para o novo nome recebido
             def editar_nome(self, nome):
                 self.nome = nome
-                print(f"Nome do artigo foi alterado para: {nome}")
             
 
             #Altera o preço de um artigo de acordo com a percentagem dada
@@ -133,7 +132,6 @@ class Artigo:
             #Altera o preço para o novo preço recebido
             def editar_preco(self, preco):
                 self.preco = preco
-                print(f"Preço do artigo foi alterado para: {preco}")
             
 
             #Apresenta o preço do artigo
@@ -144,7 +142,6 @@ class Artigo:
             #Altera a quantidade
             def editar_quantidade(self, nova_quantidade):   
                 self.quantidade = nova_quantidade
-                print(f"A quantidade do artigo {self.nome} foi atualizada para {nova_quantidade}.")
 
 
             #Apresenta a quantidade do artigo
@@ -158,7 +155,6 @@ class Artigo:
             #Altera a tipologia
             def editar_tipo (self, novo_tipo):
                 self.tipologia = novo_tipo
-                print(f"A tipologia do artigo {self.nome} foi atualizada para {novo_tipo}.")
             
 
             #Apresenta a tipologia do artigo
@@ -845,41 +841,38 @@ def main():
                                 # Aqui chamamos a função para editar o interesse do utilizador
                                 feira.editar_interesse_utilizador(nome_utilizador, nome_interesse, novo_interesse)
                                 
-                                print("Interesses do utilizador atualizados.")
+                                print("Interesse(s) do utilizador atualizado(s).")
 
                                 break
                          #
                         elif escolha_edicao == "2":
                             feira.mostrar_artigos_utilizador(nome_utilizador)
-
                             artigos_utilizador = feira.obter_artigos_utilizador(nome_utilizador)
-
 
                             nome_artigo = input("Insira o nome do artigo que deseja editar: ")
 
-                            # Verifique se o nome do artigo inserido é válido para edição
+                            # Verificar se o nome do artigo inserido é válido para edição
                             artigo_encontrado = None
                             for artigo in artigos_utilizador:
                                 if nome_artigo == artigo.nome:
-                                    artigo_encontrado = artigo
+                                    artigo_encontrado = artigo  # Salvar o objeto Artigo encontrado
                                     break
 
                             if artigo_encontrado is None:
                                 print("Artigo inválido.")
-                                break
-                             #
                             else:
                                 novo_nome = input("Novo nome do artigo: ")
                                 novo_preco = int(input("Novo preço: "))
                                 nova_tipologia = input("Nova tipologia: ")
                                 nova_quantidade = int(input("Nova quantidade: "))
-                                # Alterar.
-                                nome_artigo.editar_nome(novo_nome)
-                                nome_artigo.editar_preco(novo_preco)
-                                nome_artigo.editar_tipo(nova_tipologia)
-                                nome_artigo.editar_quantidade(nova_quantidade)
+
+                                # Aplicar as alterações ao artigo encontrado
+                                artigo_encontrado.editar_nome(novo_nome)
+                                artigo_encontrado.editar_preco(novo_preco)
+                                artigo_encontrado.editar_tipo(nova_tipologia)
+                                artigo_encontrado.editar_quantidade(nova_quantidade)
                                 
-                                    # ERRO ERRO EROO
+                                print("Artigo do utilizador atualizado.")
                                 
                                 break
                          #
