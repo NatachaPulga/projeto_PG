@@ -676,6 +676,8 @@ def main():
                 print("S - Sair")
 
                 escolha_utilizadores = input(" ")
+                # Convertendo a letra minúscula para maiúscula
+                escolha_utilizadores = escolha_utilizadores.upper()
 
                 # Para garantir uma das escolhas pretendidas.
                 while escolha_utilizadores not in ["1", "2", "3", "4", "5", "6", "7", "V", "S"]:
@@ -691,6 +693,8 @@ def main():
                     print("S - Sair")
 
                     escolha_utilizadores = input(" ")
+                    # Convertendo a letra minúscula para maiúscula
+                    escolha_utilizadores = escolha_utilizadores.upper()
 
                 # Se o utilizador escolher '1 - Registo de utilizadores'.
                 if escolha_utilizadores == "1":
@@ -701,6 +705,8 @@ def main():
                     print("V - Voltar atrás")
 
                     escolha_registo = input(" ")
+                    # Convertendo a letra minúscula para maiúscula
+                    escolha_registo = escolha_registo.upper()
 
                     # Para garantir uma das escolhas pretendidas.
                     while escolha_registo not in ["1", "2", "V"]:
@@ -708,7 +714,10 @@ def main():
                         print("1 - Registo manual")
                         print("2 - Registo por ficheiro")
                         print("V - Voltar atrás")
+                        
                         escolha_registo = input(" ")
+                        # Convertendo a letra minúscula para maiúscula
+                        escolha_registo = escolha_registo.upper()
 
                     #  Se o utilizador escolher '1 - Registo manual'.
                     if escolha_registo == "1":
@@ -875,6 +884,8 @@ def main():
                 print("S - Sair")
 
                 escolha_artigos = input(" ")
+                # Convertendo a letra minúscula para maiúscula
+                escolha_artigos = escolha_artigos.upper()
 
                 # Para garantir uma das escolhas pretendidas.
                 while escolha_artigos not in ["1", "2", "3", "4", "V", "S"]:
@@ -886,6 +897,8 @@ def main():
                     print("S - Sair")
 
                     escolha_artigos = input(" ")
+                    # Convertendo a letra minúscula para maiúscula
+                    escolha_artigos = escolha_artigos.upper()
 
                 # Se o utilizador escolher '1 - Mostrar preço de um artigo'.
                 if escolha_artigos == "1":
@@ -925,18 +938,8 @@ def main():
 
          # Se o utilizador escolher '3 - Mercado'.
         elif escolha == "3":
-            print("Pretende aceder a:")
-            print("1 - Adicionar Artigo ao Mercado")
-            print("2 - Remover Artigo do Mercado")
-            print("3 - Listar Artigos do Mercado")
-            print("V - Voltar atrás")
-            print("S - Sair")
-
-            escolha_mercado = input(" ")
-
-            # Para garantir uma das escolhas pretendidas.
-            while escolha_mercado.upper() not in ["1", "2", "3", "V", "S"]:
-                print("Escolha entre:")
+            while True:
+                print("Pretende aceder a:")
                 print("1 - Adicionar Artigo ao Mercado")
                 print("2 - Remover Artigo do Mercado")
                 print("3 - Listar Artigos do Mercado")
@@ -944,92 +947,107 @@ def main():
                 print("S - Sair")
 
                 escolha_mercado = input(" ")
+                # Convertendo a letra minúscula para maiúscula
+                escolha_mercado = escolha_mercado.upper()
 
-            # Se o utilizador escolher '1 - Adicionar Artigo ao Mercado'.
-            if escolha_mercado == "1":
-                nome_utilizador = input("Digite o nome do utilizador: ")
-            
-                # Verifica se o usuário está registrado na Feira Virtual.
-                verifica_utilizador = feira.verifica_existencia_utilizador(nome_utilizador)
+                # Para garantir uma das escolhas pretendidas.
+                while escolha_mercado.upper() not in ["1", "2", "3", "V", "S"]:
+                    print("Escolha entre:")
+                    print("1 - Adicionar Artigo ao Mercado")
+                    print("2 - Remover Artigo do Mercado")
+                    print("3 - Listar Artigos do Mercado")
+                    print("V - Voltar atrás")
+                    print("S - Sair")
 
-                if verifica_utilizador == 0:
-                    print("Utilizador não encontrado.")
-                    break
-                 #
-                elif verifica_utilizador == 1:
-                    print("Utilizador encontrado.")
+                    escolha_mercado = input(" ")
+                    # Convertendo a letra minúscula para maiúscula
+                    escolha_mercado = escolha_mercado.upper()
 
-                    print("Adicionar novo artigo.")
-                    nome_artigo = input("Nome do artigo: ")
-                    preco_artigo = float(input("Preço do artigo: "))
-                    tipologia_artigo = input("Tipologia do artigo: ")
-                    quantidade_artigo = int(input("Quantidade do artigo: "))
+                # Se o utilizador escolher '1 - Adicionar Artigo ao Mercado'.
+                if escolha_mercado == "1":
+                    nome_utilizador = input("Digite o nome do utilizador: ")
+                
+                    # Verifica se o usuário está registrado na Feira Virtual.
+                    verifica_utilizador = feira.verifica_existencia_utilizador(nome_utilizador)
 
+                    if verifica_utilizador == 0:
+                        print("Utilizador não encontrado.")
+                        break
+                    #
+                    elif verifica_utilizador == 1:
+                        print("Utilizador encontrado.")
 
-                    # ERRO ERRO ERRO!!!!
-
-                    # Cria o objeto de artigo com as informações fornecidas.
-                    novo_artigo = Artigo(nome_artigo, preco_artigo, tipologia_artigo, quantidade_artigo)
-
-                    # Adiciona o artigo ao mercado do utilizador na Feira Virtual.
-                    utilizador.mercado.adicionar_artigo(novo_artigo)
-                    print("Artigo adicionado ao mercado com sucesso!")
-                    break
-
-
-             # Se o utilizador escolher '2 - Remover Artigo do Mercado'.
-            elif escolha_mercado == "2":
-                nome_utilizador = input("Digite o nome do utilizador: ")
-            
-                # Verifica se o usuário está registrado na Feira Virtual.
-                verifica_utilizador = feira.verifica_existencia_utilizador(nome_utilizador)
-
-                # Verifica se o usuário está registrado na Feira Virtual.
-                if verifica_utilizador == 0:
-                    print("Utilizador não encontrado.")
-                    break
-                elif verifica_utilizador == 1:
-                    print("Utilizador encontrado.")
-
-                    # Mostra os artigos do mercado do utilizador
-                    feira.mostrar_artigos_utilizador(nome_utilizador)
-
-                    nome_artigo = input("Insira o nome do artigo que deseja remover: ")
-
-                    # Verifica se o artigo está no mercado do utilizador
-                    utilizador = None
-                    for user in feira.utilizadores:
-                        if user.nome == nome_utilizador:
-                            utilizador = user
-                            break
-
-                    if utilizador is not None:
-                        verifica_artigo = utilizador.verifica_existencia_artigo(nome_artigo)
-
-                        if verifica_artigo == 0:
-                            print("O artigo especificado não foi encontrado no mercado do utilizador.")
-                        elif verifica_artigo == 1:
-                            # Remove o artigo do mercado do utilizador na Feira Virtual
-                            for artigo in utilizador.artigos_disponiveis:
-                                if artigo.nome == nome_artigo:
-                                    utilizador.remover_artigo(artigo)
-                                    print("Artigo removido com sucesso!")
-                                    break
-
-             # Se o utilizador escolher '3 - Listar Artigos do Mercado'.
-            elif escolha_mercado == "3":
-                    feira.listar_artigos()
-                    break
+                        print("Adicionar novo artigo.")
+                        nome_artigo = input("Nome do artigo: ")
+                        preco_artigo = float(input("Preço do artigo: "))
+                        tipologia_artigo = input("Tipologia do artigo: ")
+                        quantidade_artigo = int(input("Quantidade do artigo: "))
 
 
-             #  Se o utilizador escolher 'V - Voltar atrás'.
-            elif escolha_mercado.upper() == "V":
-                break  # Para voltar ao menu.
+                        # ERRO ERRO ERRO!!!!
 
-             #  Se o utilizador escolher 'S - Sair'.
-            elif escolha_mercado.upper() == "S":
-                print("Obrigado por usar a Feira Virtual. Até logo!")
-                return  # Para encerra o programa.
+                        # Cria o objeto de artigo com as informações fornecidas.
+                        novo_artigo = Artigo(nome_artigo, preco_artigo, tipologia_artigo, quantidade_artigo)
+
+                        # Adiciona o artigo ao mercado do utilizador na Feira Virtual.
+                        utilizador.mercado.adicionar_artigo(novo_artigo)
+                        print("Artigo adicionado ao mercado com sucesso!")
+                        break
+
+
+                # Se o utilizador escolher '2 - Remover Artigo do Mercado'.
+                elif escolha_mercado == "2":
+                    nome_utilizador = input("Digite o nome do utilizador: ")
+                
+                    # Verifica se o usuário está registrado na Feira Virtual.
+                    verifica_utilizador = feira.verifica_existencia_utilizador(nome_utilizador)
+
+                    # Verifica se o usuário está registrado na Feira Virtual.
+                    if verifica_utilizador == 0:
+                        print("Utilizador não encontrado.")
+                        break
+                    elif verifica_utilizador == 1:
+                        print("Utilizador encontrado.")
+
+                        # Mostra os artigos do mercado do utilizador
+                        feira.mostrar_artigos_utilizador(nome_utilizador)
+
+                        nome_artigo = input("Insira o nome do artigo que deseja remover: ")
+
+                        # Verifica se o artigo está no mercado do utilizador
+                        utilizador = None
+                        for user in feira.utilizadores:
+                            if user.nome == nome_utilizador:
+                                utilizador = user
+                                break
+
+                        if utilizador is not None:
+                            verifica_artigo = utilizador.verifica_existencia_artigo(nome_artigo)
+
+                            if verifica_artigo == 0:
+                                print("O artigo especificado não foi encontrado no mercado do utilizador.")
+                            elif verifica_artigo == 1:
+                                # Remove o artigo do mercado do utilizador na Feira Virtual
+                                for artigo in utilizador.artigos_disponiveis:
+                                    if artigo.nome == nome_artigo:
+                                        utilizador.remover_artigo(artigo)
+                                        print("Artigo removido com sucesso!")
+                                        break
+
+                # Se o utilizador escolher '3 - Listar Artigos do Mercado'.
+                elif escolha_mercado == "3":
+                        feira.listar_artigos()
+                        break
+
+
+                #  Se o utilizador escolher 'V - Voltar atrás'.
+                elif escolha_mercado.upper() == "V":
+                    break  # Para voltar ao menu.
+
+                #  Se o utilizador escolher 'S - Sair'.
+                elif escolha_mercado.upper() == "S":
+                    print("Obrigado por usar a Feira Virtual. Até logo!")
+                    return  # Para encerra o programa.
 
 
 
