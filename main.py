@@ -93,7 +93,9 @@ class Utilizador:
             def obter_artigos_disponiveis(self):
                 return self.artigos_disponiveis
 
-
+            # Método para obter os interesses do utilizador
+            def obter_interesses(self):
+                return self.interesses
 
 
 
@@ -587,13 +589,20 @@ class FeiraVirtual:
                 print(f"Lista de utilizadores ordenada por reputação exportada para '{nome_ficheiro}' com sucesso.")
 
 
-            # Recuperar artigos de um usuário.
+            # Obter os artigos de um utilizador pelo nome.
             def obter_artigos_utilizador(self, nome):
                 for utilizador in self.utilizadores:
                     if nome == utilizador.nome:
                         return utilizador.obter_artigos_disponiveis()
                 return None  # Retornar None se o usuário não for encontrado
 
+
+            # Obter os interesses de um utilizador pelo nome.
+            def obter_interesses_utilizador(self, nome):
+                for utilizador in self.utilizadores:
+                    if nome == utilizador.nome:
+                        return utilizador.obter_interesses()
+                return None  # Retorna None se o utilizador não for encontrado
 
 
             #Início da feira. O grupo deve apresentar testes do projeto nesta função
@@ -801,13 +810,29 @@ def main():
 
 
                         if escolha_edicao == "1":
-                            # Editar interesses do utilizador
-                            novos_interesses = input("Insira os novos interesses (separados por vírgula): ")
-                            nome_utilizador.editar_conta(novos_interesses.split(','))
+                            feira.mostrar_interesses_utilizador(nome_utilizador)
 
-                             # ERRO ERRO EROO
+                            interesses_utilizador = feira.obter_interesses_utilizador(nome_utilizador)
 
-                            break
+                            nome_interesse = input("Insira o nome do artigo que deseja editar: ")
+
+                            # Verifique se o nome do interesse inserido é válido para edição
+                            interesse_encontrado = None
+                            for interesse in interesses_utilizador:
+                                if nome_interesse == interesse:
+                                    interesse_encontrado = interesse
+                                    break
+
+                            if interesse_encontrado is None:
+                                print("Interrese inválido.")
+                                break
+                             #
+                            else:
+
+
+                                        # ERRO ERRO EROO
+
+                                break
                          #
                         elif escolha_edicao == "2":
                             feira.mostrar_artigos_utilizador(nome_utilizador)
