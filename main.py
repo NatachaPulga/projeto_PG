@@ -971,34 +971,37 @@ def main():
                  # Se o utilizador escolher '2 - Remover Artigo do Mercado'.
                 elif escolha_mercado == "2":
                     nome_utilizador = input("Digite o nome do utilizador: ")
+            
+                    # Verifica se o usuário está registrado na Feira Virtual.
+                    verifica_utilizador = feira.verifica_existencia_utilizador(nome_utilizador)
 
                     # Verifica se o usuário está registrado na Feira Virtual.
-                    if nome_utilizador not in feira.utilizadores:
+                    if verifica_utilizador == 0:
                         print("Utilizador não encontrado.")
                         break
+                    elif verifica_utilizador == 1:
+                        # Mostra os artigos do mercado do utilizador
+                        feira.utilizadores[nome_utilizador].mercado.listar_artigos()
 
-                    # Mostra os artigos do mercado do utilizador
-                    feira.utilizadores[nome_utilizador].mercado.listar_artigos()
+                        nome_artigo = input("Insira o nome do artigo que deseja remover: ")
 
-                    nome_artigo = input("Insira o nome do artigo que deseja remover: ")
+                        # Verifica se o artigo está no mercado do utilizador
+                        if nome_artigo not in feira.utilizadores[nome_utilizador].mercado.listar_artigos():
+                            print("O artigo especificado não foi encontrado no mercado do utilizador.")
+                            break
+                        #
+                        # Procura pelo artigo com o nome especificado no mercado do utilizador
+                        elif nome_artigo in feira.utilizadores[nome_utilizador].mercado.listar_artigos():
+                            artigo_a_remover = None
+                            for artigo in feira.utilizadores[nome_utilizador].mercado.artigos:
+                                if artigo.nome == nome_artigo:
+                                    artigo_a_remover = artigo
+                                    break
 
-                    # Verifica se o artigo está no mercado do utilizador
-                    if nome_artigo not in feira.utilizadores[nome_utilizador].mercado.listar_artigos():
-                        print("O artigo especificado não foi encontrado no mercado do utilizador.")
-                        break
-                     #
-                     # Procura pelo artigo com o nome especificado no mercado do utilizador
-                    elif nome_artigo in feira.utilizadores[nome_utilizador].mercado.listar_artigos():
-                        artigo_a_remover = None
-                        for artigo in feira.utilizadores[nome_utilizador].mercado.artigos:
-                            if artigo.nome == nome_artigo:
-                                artigo_a_remover = artigo
-                                break
-
-                        # Remove o artigo do mercado do utilizador na Feira Virtual
-                        feira.utilizadores[nome_utilizador].mercado.remover_artigo(artigo_a_remover)
-                        print("Artigo removido com sucesso!")
-                        break
+                            # Remove o artigo do mercado do utilizador na Feira Virtual
+                            feira.utilizadores[nome_utilizador].mercado.remover_artigo(artigo_a_remover)
+                            print("Artigo removido com sucesso!")
+                            break
 
 
                  # Se o utilizador escolher '3 - Listar Artigos do Mercado'.
