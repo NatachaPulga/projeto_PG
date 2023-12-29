@@ -257,7 +257,7 @@ class FeiraVirtual:
                                 info_artigo = artigo.split(',')
                                 if len(info_artigo) == 4:
                                     nome_artigo = info_artigo[0]
-                                    preco = float(info_artigo[1])
+                                    preco = info_artigo[1]
                                     tipologia = info_artigo[2]
                                     quantidade = int(info_artigo[3])
                                     novo_artigo = Artigo(nome_artigo, preco, tipologia, quantidade)
