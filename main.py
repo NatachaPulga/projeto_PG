@@ -80,13 +80,15 @@ class Utilizador:
                 print(f"O artigo {artigo.nome} foi eliminado da Feira Virtual.")
 
 
-            # NOVA FUNÇÃO!
+            # Verifica a existencia de um artigo de um utilizador.
             def verifica_existencia_artigo(self, nome_artigo):
                 for artigo in self.artigos_disponiveis:
                     if artigo.nome == nome_artigo:
                         return 1
                 else:
                     return 0
+
+
 
 
 
@@ -970,7 +972,7 @@ def main():
                     novo_artigo = Artigo(nome_artigo, preco_artigo, tipologia_artigo, quantidade_artigo)
 
                     # Adiciona o artigo ao mercado do utilizador na Feira Virtual.
-                    feira.utilizadores[nome_utilizador].mercado.adicionar_artigo(novo_artigo)
+                    utilizador.mercado.adicionar_artigo(novo_artigo)
                     print("Artigo adicionado ao mercado com sucesso!")
                     break
 
