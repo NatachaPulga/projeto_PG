@@ -368,11 +368,12 @@ class FeiraVirtual:
                 else:
                     print("Artigos disponíveis ordenados por preço:")
 
-                    #Apresenta os artigos, por ordem crescente, de acordo com o preço
+                    #Apresenta os artigos, por ordem crescente, de acordo com o preço.
                     artigos_ordem = sorted(lista_completa_artigos, key=lambda x: x.preco)
-                    
-                    for artigo in artigos_ordem:
-                        print(f"{artigo.nome}, Preço: {artigo.preco}")     
+                    # 'enumerate(lista_artigos, 1)': 'enumerate()' retorna um objeto enumerado, e '1' é o argumento opcional que especifica o índice inicial da enumeração.
+                    for i, artigo in enumerate(artigos_ordem, 1):
+                        print(f"{i}. Artigo: {artigo.nome}, Preço: {artigo.preco} Pycoins, Tipologia: {artigo.tipologia}, Quantidade: {artigo.quantidade}")   
+ 
 
 
             def mostrar_preco_artigo(self, nome_artigo):
@@ -717,21 +718,19 @@ def main():
 
                      #  Se o utilizador escolher '2 - Registo por ficheiro'.
                     elif escolha_registo == "2":
-                        # Tem de estar dentro do loop para se conseguir voltar a atrás.
-                        while True:
-                            nome_ficheiro = input("Insira o nome do ficheiro de utilizadores para importar: ")
+                        nome_ficheiro = input("Insira o nome do ficheiro de utilizadores para importar: ")
 
-                            # Verifica se o nome do arquivo inserido termina com '.txt'.
-                            # 'endswith()' é um método usado para verificar se uma string termina com um sufixo específico, '(".txt")'. Ele retorna True se a string terminar com o sufixo especificado e False caso contrário.
-                            if nome_ficheiro.endswith(".txt"):
-                                # Importa os utilizadores a partir do ficheiro especificado.
+                        # Verifica se o nome do arquivo inserido termina com '.txt'.
+                        # 'endswith()' é um método usado para verificar se uma string termina com um sufixo específico, '(".txt")'. Ele retorna True se a string terminar com o sufixo especificado e False caso contrário.
+                        if nome_ficheiro.endswith(".txt"):
+                            # Importa os utilizadores a partir do ficheiro especificado.
 
-                                #feira.importar_utilizadores(nome_ficheiro)   
-                                feira.registar_utilizador_ficheiro(nome_ficheiro)
-                                print("Registo por ficheiro criado com sucesso!")
-                                break  # Para voltar ao menu.
-                            else:
-                                print("Por favor, insira um nome de arquivo válido com a extensão '.txt'.")
+                            #feira.importar_utilizadores(nome_ficheiro)   
+                            feira.registar_utilizador_ficheiro(nome_ficheiro)
+                            print("Registo por ficheiro criado com sucesso!")
+                            break  # Para voltar ao menu.
+                        else:
+                            print("Por favor, insira um nome de arquivo válido com a extensão '.txt'.")
 
 
                      #  Se o utilizador escolher 'V - Voltar atrás'.
@@ -995,26 +994,7 @@ def main():
 
                  # Se o utilizador escolher '3 - Listar Artigos do Mercado'.
                 elif escolha_mercado == "3":
-                    nome_utilizador = input("Digite o nome do utilizador: ")
-
-                    # Verifica se o usuário está registrado na Feira Virtual.
-                    if nome_utilizador not in feira.utilizadores:
-                        print("Utilizador não encontrado.")
-                        break
-
-                    # Obtém a lista de artigos do mercado do utilizador
-                    lista_artigos = feira.utilizadores[nome_utilizador].mercado.listar_artigos()
-
-                    # Verifica se existem artigos no mercado
-                    if not lista_artigos:
-                        print("Não há artigos disponíveis no mercado.")
-                        break
-                    else:
-                        print("Artigos Disponíveis no Mercado:")
-                        # 'enumerate(lista_artigos, 1)': 'enumerate()' retorna um objeto enumerado, e '1' é o argumento opcional que especifica o índice inicial da enumeração.
-                        for i, artigo in enumerate(lista_artigos, 1):
-                            print(f"{i}. Artigo: {artigo.nome}, Preço: {artigo.preco} Pycoins, Tipologia: {artigo.tipologia}, Quantidade: {artigo.quantidade}")
-                        
+                        feira.listar_artigos()
                         break
 
 
