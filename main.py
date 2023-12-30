@@ -16,9 +16,8 @@ class Utilizador:
                 self.artigos_disponiveis = novos_artigos
                 print(f"A conta do utilizador {self.nome} atualizada com sucesso!")
 
-            #Adiciona uma nova avaliação, podendo incluir um comentário
+            # Adiciona uma nova avaliação, podendo incluir um comentário.
             def deixar_avaliacao(self, estrelas, comentario):
-                # '\n' para fazer uma quebra de linha.
                 self.avaliacoes.append({"estrelas": estrelas, "comentario": comentario})
                 print(f"Avaliação do utilizador {self.nome}, foi registrada com sucesso!")
 
@@ -27,12 +26,13 @@ class Utilizador:
                 # Para verificar se a lista 'self.avaliacoes' está vazia.
                 if not self.avaliacoes:
                     print(f"Ainda não há avaliações para {self.nome}.")
+
+                 # Se a lista 'self.avaliacoes' não estiver vazia.
                 else:
                     # Loop que percorre cada item da lista 'self.avaliacoes' e atribui temporariamente a cada um dos itens à variável 'avaliacao'.
                     # A 'avaliacao' representa um dicionário que contém informações sobre uma avaliação específica, como estrelas e comentários associados a essa avaliação.
                     for avaliacao in self.avaliacoes:
                         print(f"Utilizador: {self.nome}.")
-                        # '\n' para fazer uma quebra de linha.
                         # Em '{avaliacao['estrelas']}' e '{avaliacao['comentário']}' estamos extrair e exibir o número de estrelas da avaliação e o comentário, armazenada no dicionário 'avaliacao'.
                         print(f"Avaliação: {avaliacao['estrelas']} estrelas. \n Comentário: {avaliacao['comentário']}.")
 
@@ -73,15 +73,15 @@ class Utilizador:
                 # Loop onde para cada 'artigo' na lista 'self.artigos_disponiveis', verifica se o 'nome' do 'artigo' é igual ao 'nome_artigo' passado como argumento.
                 for artigo in self.artigos_disponiveis:
                     if artigo.nome == nome_artigo:
-                        return 1
+                        return 1 # Se existir retorna 1.
                 else:
-                     return 0
+                     return 0 # Se não existir retorna 0.
 
             # Obter artigos disponiveis de um utilizador.
             def obter_artigos_disponiveis(self):
                 return self.artigos_disponiveis
 
-            # MObter os interesses de um utilizador.
+            # Obter os interesses de um utilizador.
             def obter_interesses(self):
                 return self.interesses
 
@@ -106,7 +106,8 @@ class Artigo:
                 # Preço aumenta 25%, se a quantidade do artigo for menor ou igual a 3.
                 if self.quantidade <= 3:
                     self.preco = self.preco + (self.preco * percentagem_alteracao)
-                # Preço diminui 25%, se a quantidade do artigo for maior que 10.
+
+                 # Preço diminui 25%, se a quantidade do artigo for maior que 10.
                 elif self.quantidade > 10:
                     self.preco = self.preco - (self.preco * percentagem_alteracao)
             
@@ -152,13 +153,13 @@ class FeiraVirtual:
                 self.avaliacoes = []
                 self.interesses = []
         
-            # Verifica se o utilizador existe na lista de utilizadores. Se existir, retorna 1. Caso contrário, retorna 0.
+            # Verifica se o utilizador existe na lista de utilizadores.
             def verifica_existencia_utilizador(self, nome_utilizador):
                 for utilizador in self.utilizadores:
                     if utilizador.nome == nome_utilizador:
-                        return 1
+                        return 1 # Se existir retorna 1.
                 else:
-                    return 0
+                    return 0 # Se não existir retorna 0.
                 
             # Gera nome único de utilizador.
             def gera_nome_utilizador_unico(self, nome_utilizador):
@@ -171,7 +172,7 @@ class FeiraVirtual:
                  # Nome existe, então será gerado um novo nome.
                 else:
                     print(f"O nome de utilizador {nome_utilizador} já existe.")
-                    # Enquanto o nome existir, é gerado um novo.
+                    # Enquanto o nome existir, é gerado um novo. Retorna o nome gerado.
                     while user_existe == 1: 
                         numero_aleatorio = ''.join(str(random.randint(0, 9)) for _ in range(5)) # Cria uma cadeia de 5 números aleatórios entre 0 e 9.
                         nome = nome_utilizador + numero_aleatorio # Novo nome = nome_utilizadorNUMEROS_RANDOM.
@@ -229,24 +230,24 @@ class FeiraVirtual:
                                     novo_artigo = Artigo(nome_artigo, preco, tipologia, quantidade)
                                     artigos_disponiveis.append(novo_artigo)
 
-                            #Gera um nome de utilizador unico
+                            # Gera um nome de utilizador único.
                             nome_utilizador = self.gera_nome_utilizador_unico(nome)
                         
                             if nome_utilizador != nome: 
-                                print(f"O utilizador {nome} foi importado com o nome {nome_utilizador}.") # Informa a atualizacao do nome
+                                print(f"O utilizador {nome} foi importado com o nome {nome_utilizador}.") # Informa a atualização do nome do utilizador.
 
-                            #Cria o novo utilizador e adiciona à lista
+                            # Cria o novo utilizador e adiciona à lista.
                             novo_utilizador = Utilizador(nome_utilizador, interesses, artigos_disponiveis)
                             self.utilizadores.append(novo_utilizador)
 
             # Importa uma lista de utilizadores a partir de um ficheiro.
             def importar_utilizadores(self, nome_ficheiro):
-                # Abre o ficheiro em modo leitura e encoding utf-8 para a acentuação aparecer ok.
+                # Abre o ficheiro em modo leitura e 'encoding utf-8' para a acentuação aparecer ok.
                 with open(nome_ficheiro, "r", encoding='utf-8') as ficheiro: 
                     registos = ficheiro.readlines()
 
                     # Avança para processar apenas a partir da linha seguinte ao header.
-                    for registo in registos[1:]: #O 0 corresponde ao header
+                    for registo in registos[1:]: # O 0 corresponde ao header.
                         # Remove caracter /n (usando o strip). Separa pelo caracter ";" e cria a lista valores_a_inserir com os campos separados.
                         valores_a_inserir = registo.strip().split(";")
 
@@ -274,7 +275,7 @@ class FeiraVirtual:
                         nome_final_utilizador = self.gera_nome_utilizador_unico(nome_utilizador)
                         
                         if nome_final_utilizador != nome_utilizador: 
-                            print(f"O utilizador {nome_utilizador} foi importado com o nome {nome_final_utilizador}.") # Informa a atualização do nome.
+                            print(f"O utilizador {nome_utilizador} foi importado com o nome {nome_final_utilizador}.") # Informa a atualização do nome do utilizador.
 
                         # Cria o novo utilizador e adiciona-o à lista.
                         novo_utilizador = Utilizador(nome_final_utilizador, interesses_utilizador, artigos_utilizador)
@@ -380,8 +381,11 @@ class FeiraVirtual:
                         artigo_a_vender = artigo_aux
 
                 # Valida a disponibilidade do artigo.
-                if artigo_a_vender is None or artigo_a_vender.quantidade < 1: # Caso não encontre o artigo na lista ou a quantidade não seja positiva.
+                # Caso não encontre o artigo na lista ou a quantidade não seja positiva.
+                if artigo_a_vender is None or artigo_a_vender.quantidade < 1: 
                     print(f"O artigo {artigo} não se encontra disponível para venda.")
+
+                 # Caso encontre o artigo na lista ou a quantidade seja positiva.
                 else:
                     # Guarda os objetos Utilizador do comprador e vendedor.
                     for utilizador in self.utilizadores:
@@ -390,19 +394,27 @@ class FeiraVirtual:
                         if vendedor == utilizador.nome:
                             utilizador_vendedor = utilizador   
                     
+                    # Verificar se o utilizador tem 'pycoins' suficientes.
+                    # Se tiver 'pycoins' suficientes.
                     if utilizador_comprador.pycoins >= artigo_a_vender.preco:
                         # Processamento comprador.
                         pycoins_atualizar = utilizador_comprador.pycoins - artigo_a_vender.preco
                         utilizador_comprador.alterar_pycoins(pycoins_atualizar)
+                        
                         # Processamento vendedor.
                         pycoins_atualizar = utilizador_vendedor.pycoins + artigo_a_vender.preco
                         utilizador_vendedor.alterar_pycoins(pycoins_atualizar)
+                        
                         # Finalização compra.
                         print(f"{comprador} comprou {artigo} de {vendedor} com sucesso!")
+                        
+                        # Remover ou diminuir a quantidade de um artigo.
                         if artigo_a_vender.quantidade == 1:
-                            utilizador_vendedor.remover_artigo(artigo_a_vender) #Remove o artigo porque apenas tinha 1 unidade
+                            utilizador_vendedor.remover_artigo(artigo_a_vender) # Remove o artigo porque apenas tinha 1 unidade.
                         else:
-                            artigo_a_vender.editar_quantidade(artigo_a_vender.quantidade-1) #Diminui a quantidade em 1
+                            artigo_a_vender.editar_quantidade(artigo_a_vender.quantidade-1) # Diminui a quantidade em 1.
+
+                     # Se não tiver 'pycoins' suficientes.
                     else:
                         print(f"{comprador} não tem pycoins suficientes.")
             
@@ -410,11 +422,13 @@ class FeiraVirtual:
             def calcular_reputacao(self, utilizador):
                 # Para sabermos o total de avaliações.
                 total_avaliacoes = len(utilizador.avaliacoes)
+
                 # Se não houver avaliações.
                 if total_avaliacoes == 0:
                     print(f"O utilizador {utilizador.nome} ainda não recebeu nenhuma avaliação.")
-                    # Devolve 0, pois não existem avaliações.
-                    return 0
+                    return 0 # Devolve 0, pois não existem avaliações.
+                
+                 # Se houver avaliações.
                 else:
                     # Número inicial do contador de estrelas (avaliações).
                     soma_estrelas = 0
@@ -424,14 +438,15 @@ class FeiraVirtual:
 
                     # Váriavel que tem a média de estrelas (avaliações) de um utilizador.
                     reputacao_media = soma_estrelas / total_avaliacoes
-                    # Em '{reputacao_media:.2f}': o 'f', significa que o número será formatado como um float (número decimal); e o '.2', especifica que queremos exibir apenas duas casas decimais, após o ponto decimal.
+
+                    # Em '{reputacao_media:.2f}': o 'f', significa que o número será formatado como um 'float' (número decimal); e o '.2', especifica que queremos exibir apenas duas casas decimais, após o ponto decimal.
                     print(f"A reputação média de {utilizador.nome} é {reputacao_media:.2f} estrelas.")
-                    # Devolve reputação média de um utilizador, de acordo com as avaliações existentes.
-                    return reputacao_media
+
+                    return reputacao_media # Devolve reputação média de um utilizador, de acordo com as avaliações existentes.
 
             # Coloca um artigo à venda. O vendedor é o nome de um utilizador.
             def colocar_artigo_para_venda(self, vendedor, artigo, preco):
-                # Verifica se o vendedor existe na feira virtual.
+                # Verifica se o vendedor existe.
                 if vendedor in self.utilizadores:
                     # Verifica se o artigo pertence ao vendedor.
                     if artigo in vendedor.artigos_disponiveis:
@@ -443,9 +458,9 @@ class FeiraVirtual:
                     else:
                         print(f"O utilizador {vendedor.nome} não possui o artigo '{artigo.nome}' para venda.")
 
-                 # Se não se verificar que o vendedor existe na feira virtual.
+                 # Se não se verificar que o vendedor existe.
                 else:
-                    print(f"O vendedor '{vendedor}' não está registrado na feira virtual.")
+                    print(f"O vendedor '{vendedor}' não está registrado.")
 
             # Encontra os nomes de utilizadores interessados no artigo recebido.
             def encontrar_compradores_interessados(self, artigo):
@@ -457,13 +472,13 @@ class FeiraVirtual:
                     if artigo.nome in utilizador.interesses:
                         compradores_interessados.append(utilizador.nome)
 
-                # Uma lista com elementos será avaliada como True, e uma lista vazia será avaliada como False.
-                # Caso a lista com elementos seja avaliada.
+                # Uma lista com elementos será avaliada como 'True', e uma lista vazia será avaliada como 'False'.
+                # Caso a lista com elementos seja avaliada como 'True'.
                 if compradores_interessados:
                     # O 'join()' é utilizado para juntar (ou concatenar) elementos. Ou seja, em {', '.join(compradores_interessados)} acontce uma uniam dos elementos da lista 'compradores_interessados' em uma única string, separando cada elemento da lista por ', '.
                     print(f"Compradores interessados no artigo '{artigo.nome}' são: {', '.join(compradores_interessados)}")
                 
-                 # Caso a lista com elementos não seja avaliada.
+                 # Caso a lista com elementos seja avaliada como 'False'.
                 else:
                     print(f"Nenhum comprador está interessado no artigo '{artigo.nome}'.")
 
@@ -471,7 +486,7 @@ class FeiraVirtual:
 
             # Exporta a lista de artigos para um ficheiro ordenados por quantidade.
             def exportar_artigos_preco(self, nome_ficheiro):
-                # Uma lista com elementos será avaliada como True, e uma lista vazia será avaliada como False.
+                # Uma lista com elementos será avaliada como 'True', e uma lista vazia será avaliada como 'False'.
                 # Verifica se existem artigos na feira virtual.
                 if not self.utilizadores:
                     print("Não há artigos para exportar.")
@@ -484,7 +499,6 @@ class FeiraVirtual:
                 # Abre o arquivo para escrita.
                 with open(nome_ficheiro, 'w') as arquivo:
                     # Escreve o cabeçalho ou informações iniciais, se necessário.
-                    # '\n' para fazer uma quebra de linha.
                     arquivo.write("Lista de Artigos Ordenados por Quantidade:\n")
 
                     for artigo in self.utilizadores:
@@ -498,8 +512,8 @@ class FeiraVirtual:
                 # Nome do arquivo predefinido.
                 nome_ficheiro = "utilizadores_ordenados.txt"
 
-                # Uma lista com elementos será avaliada como True, e uma lista vazia será avaliada como False.
-                # Verifica se existem utilizadores na feira virtual.
+                # Uma lista com elementos será avaliada como 'True', e uma lista vazia será avaliada como 'False'.
+                # Verifica se existem utilizadores.
                 if not self.utilizadores:
                     print("Não há utilizadores para exportar.")
                     return
@@ -512,13 +526,12 @@ class FeiraVirtual:
                 # Abre o arquivo para escrita.
                 with open(nome_ficheiro, 'w') as arquivo:
                     # Escreve o cabeçalho ou informações iniciais, se necessário.
-                    # O '\n' é para fazer uma quebra de linha.
                     arquivo.write("Lista de Utilizadores Ordenados por Reputação:\n")
 
-                    # Itera sobre os utilizadores ordenados por reputação
+                    # Exportar lista de utilizadores, ordenados por reputação.
                     for utilizador in self.utilizadores:
                         # Escreve as informações do utilizador no arquivo.
-                        # Em '{self.calcular_reputacao(utilizador):.2f}': o 'f', significa que o número será formatado como um float (número decimal); e o '.2', especifica que queremos exibir apenas duas casas decimais, após o ponto decimal. O '\n' é para fazer uma quebra de linha.
+                        # Em '{self.calcular_reputacao(utilizador):.2f}': o 'f', significa que o número será formatado como um 'float' (número decimal); e o '.2', especifica que queremos exibir apenas duas casas decimais, após o ponto decimal.
                         arquivo.write(f"Nome: {utilizador.nome}, Reputação: {self.calcular_reputacao(utilizador):.2f} estrelas \n")
 
                 print(f"Lista de utilizadores ordenada por reputação exportada para '{nome_ficheiro}' com sucesso.")
@@ -528,23 +541,23 @@ class FeiraVirtual:
                 for utilizador in self.utilizadores:
                     if nome == utilizador.nome:
                         return utilizador.obter_artigos_disponiveis()
-                return None  # Retornar None se o utilizador não for encontrado
+                return None  # Retornar 'None' se o utilizador não for encontrado.
 
             # Obter os interesses de um utilizador pelo nome.
             def obter_interesses_utilizador(self, nome):
                 for utilizador in self.utilizadores:
                     if nome == utilizador.nome:
                         return utilizador.obter_interesses()
-                return None  # Retorna None se o utilizador não for encontrado
+                return None  # Retornar 'None' se o utilizador não for encontrado.
 
             # Editar interesses.
             def editar_interesse_utilizador(self, nome_utilizador, nome_interesse, novo_interesse):
-                    # Obter os interesses do utilizador
+                    # Obter os interesses do utilizador.
                     interesses_utilizador = self.obter_interesses_utilizador(nome_utilizador)
 
-                    # Verificar se o interesse a ser editado está na lista de interesses do utilizador
+                    # Verificar se o interesse a ser editado está na lista de interesses do utilizador.
                     if nome_interesse in interesses_utilizador:
-                        # Remover o interesse antigo e adicionar os novos interesses
+                        # Remover o interesse antigo e adicionar os novos interesses.
                         interesses_utilizador.remove(nome_interesse)
                         novos_interesses = [interesse.strip() for interesse in novo_interesse.split(',')]
                         interesses_utilizador.extend(novos_interesses)
@@ -552,7 +565,7 @@ class FeiraVirtual:
 
             #Início da feira. O grupo deve apresentar testes do projeto nesta função
             def main():
-                pass # Os testes realizados estão no fim do código.
+                pass     # Por motivos de organização, os testes realizados estão no fim do código.
 
 
 
@@ -582,7 +595,7 @@ class Mercado:
                         print(f"Preço: {artigo.preco}")
                         print(f"Quantidade: {artigo.quantidade}")
 
-                        return # Para encerra a função após encontrar o artigo correspondente.
+                        return
 
                 print("Artigo não encontrado.") # Exibe mensagem se o artigo não for encontrado na lista.
 
@@ -594,7 +607,8 @@ feira = FeiraVirtual() # Para criar uma instância de FeiraVirtual.
 
 # Iniciar programa.
 def main():
-    print("Bem-vindo/a à Feira Virtual.", end=' ')
+    print("Bem-vindo/a à Feira Virtual.", end=' ') # 'end=' '' para juntar o texto da 'print' ao texto da 'print' seguinte.
+
     # Para "não" terminar o programa.
     while True:
         print("Pretende aceder a:")
@@ -604,7 +618,7 @@ def main():
 
         escolha = input(" ")
 
-        # Para garantir uma das escolhas pretendidas.
+        # Para se garantir a resposta, dentro das escolhas possíveis.
         while escolha not in ["1", "2", "3"]:
             print("Escolha entre:")
             print("1 - Utilizadores")
@@ -613,9 +627,11 @@ def main():
 
             escolha = input(" ")
 
+
+
         # Se o utilizador escolher '1 - Utilizadores'.
         if escolha == "1":
-            # Tem de estar dentro do loop para se conseguir voltar a atrás.
+            # O código tem de estar dentro de um loop, para ser possível voltar a atrás.
             while True:
                 print("Pretende aceder a:")
                 print("1 - Registo de utilizadores")
@@ -629,9 +645,9 @@ def main():
                 print("S - Sair")
 
                 escolha_utilizadores = input(" ")
-                escolha_utilizadores = escolha_utilizadores.upper() # Convertendo a letra minúscula para maiúscula.
+                escolha_utilizadores = escolha_utilizadores.upper() # Converte a letra minúscula para maiúscula.
 
-                # Para garantir uma das escolhas pretendidas.
+                # Para se garantir a resposta, dentro das escolhas possíveis.
                 while escolha_utilizadores not in ["1", "2", "3", "4", "5", "6", "7", "V", "S"]:
                     print("Escolha entre:")
                     print("1 - Registo de utilizadores")
@@ -645,20 +661,20 @@ def main():
                     print("S - Sair")
 
                     escolha_utilizadores = input(" ")
-                    escolha_utilizadores = escolha_utilizadores.upper() # Convertendo a letra minúscula para maiúscula.
+                    escolha_utilizadores = escolha_utilizadores.upper() # Converte a letra minúscula para maiúscula.
+
 
                 # Se o utilizador escolher '1 - Registo de utilizadores'.
                 if escolha_utilizadores == "1":
-
                     print("Pretende aceder a:")
                     print("1 - Registo manual")
                     print("2 - Registo por ficheiro")
                     print("V - Voltar atrás")
 
                     escolha_registo = input(" ")
-                    escolha_registo = escolha_registo.upper() # Convertendo a letra minúscula para maiúscula.
+                    escolha_registo = escolha_registo.upper() # Converte a letra minúscula para maiúscula.
 
-                    # Para garantir uma das escolhas pretendidas.
+                    # Para se garantir a resposta, dentro das escolhas possíveis.
                     while escolha_registo not in ["1", "2", "V"]:
                         print("Escolha entre:")
                         print("1 - Registo manual")
@@ -666,7 +682,8 @@ def main():
                         print("V - Voltar atrás")
                         
                         escolha_registo = input(" ")
-                        escolha_registo = escolha_registo.upper() # Convertendo a letra minúscula para maiúscula.
+                        escolha_registo = escolha_registo.upper() # Converte a letra minúscula para maiúscula.
+
 
                     #  Se o utilizador escolher '1 - Registo manual'.
                     if escolha_registo == "1":
@@ -675,7 +692,7 @@ def main():
                         print("Os artigos disponíveis devem de ser escritos no formato seguinte: 'Nome, Preço, Tipologia, Quantidade', se quizer adicionar outro artigo deve de separa-lo com '&')")
                         artigos_utilizador = input("Digite os artigos disponíveis:\n")
 
-                        # Chama o método registar_utilizador com as informações fornecidas pelo utilizador.
+                        # Chama 'registar_utilizador' para registar o utilizador.
                         feira.registar_utilizador(nome_utilizador, interesses_utilizador, artigos_utilizador)
 
                         print("Registo manual criado com sucesso.")
@@ -684,19 +701,22 @@ def main():
 
                      #  Se o utilizador escolher '2 - Registo por ficheiro'.
                     elif escolha_registo == "2":
-                        print("Utilize o nome do ficherio ou a 'Path' (localização) do ficheiro.")
+                        print("Utilize o nome do ficheiro ou a 'Path' (localização) do ficheiro.")
                         nome_ficheiro = input("Insira o nome do ficheiro de utilizadores para importar:\n")
 
                         # Verifica se o nome do arquivo inserido termina com '.txt'.
-                        # 'endswith()' é um método usado para verificar se uma string termina com um sufixo específico, '(".txt")'. Ele retorna True se a string terminar com o sufixo especificado e False caso contrário.
+                        # 'endswith()' é um método usado para verificar se uma string termina com um sufixo específico ( ".txt" ). Retorna 'True' se a string terminar com o sufixo especificado, caso contrário retorna 'False'.
                         if nome_ficheiro.endswith(".txt"):
-                            # Importa os utilizadores a partir do ficheiro especificado.  
+                            # Importa os utilizadores a partir do ficheiro específico.  
                             feira.registar_utilizador_ficheiro(nome_ficheiro)
-                            print("Registo criado com sucesso.")
 
+                            print("Registo criado com sucesso.")
                             break  # Para voltar ao menu.
+
+                         # Se o nome do arquivo inserido não terminar com '.txt'.
                         else:
-                            print("Por favor, insira um nome de arquivo válido com a extensão '.txt'.")
+                            print("Nome do arquivo (com ou sem a extensão '.txt') ou 'Path' (localização) inválidos.")
+                            break  # Para voltar ao menu.
 
 
                      #  Se o utilizador escolher 'V - Voltar atrás'.
@@ -708,155 +728,178 @@ def main():
                 elif escolha_utilizadores == "2":
                     nome_utilizador = input("Digite o nome do utilizador:\n")
             
-                    verifica_utilizador = feira.verifica_existencia_utilizador(nome_utilizador) # Verifica se o utilizador está registrado na Feira Virtual
+                    verifica_utilizador = feira.verifica_existencia_utilizador(nome_utilizador) # Verifica se o utilizador está registado.
 
+                    # Se o utilizador não estiver registado.
                     if verifica_utilizador == 0:
-                        print("Nome do utilizador inválido.")
-                        break
-                     #
+                        print("Utilizador não encontrado.")
+                        break # Para voltar ao menu.
+                    
+                     # Se o utilizador estiver registado.
                     elif verifica_utilizador == 1:
                         print("Pretende aceder a:")
                         print("1 - Editar interesses")
                         print("2 - Editar artigos")
                         print("V - Voltar atrás")
 
-                        escolha_edicao = input("Escolha uma opção: ")
+                        escolha_edicao = input(" ")
+                        escolha_edicao = escolha_edicao.upper() # Converte a letra minúscula para maiúscula.
 
-                        # Para garantir uma das escolhas pretendidas.
+                        # Para se garantir a resposta, dentro das escolhas possíveis.
                         while escolha_edicao not in ["1", "2", "V"]:
                             print("Escolha entre:")
                             print("1 - Editar interesses")
                             print("2 - Editar artigos")
                             print("V - Voltar atrás")
 
-                            escolha_edicao = input("Escolha uma opção: ")
+                            escolha_edicao = input(" ")
+                            escolha_edicao = escolha_edicao.upper() # Converte a letra minúscula para maiúscula.
 
+
+                        # Se o utilizador escolher '1 - Editar interesses'.
                         if escolha_edicao == "1":
-                            feira.mostrar_interesses_utilizador(nome_utilizador)
+                            feira.mostrar_interesses_utilizador(nome_utilizador) # Mostra os interesses do utilizador.
 
                             interesses_utilizador = feira.obter_interesses_utilizador(nome_utilizador)
 
-                            nome_interesse = input("Insira o nome do artigo que deseja editar: ")
+                            nome_interesse = input("Insira o nome do artigo que deseja editar:\n")
 
-                            # Verifique se o nome do interesse inserido é válido para edição.
+                            # Verifique se o nome do interesse inserido é válido (existe).
                             interesse_encontrado = None
                             for interesse in interesses_utilizador:
                                 if nome_interesse == interesse:
                                     interesse_encontrado = interesse
-                                    break
-
+                                    break # Para o loop.
+                            
+                            # Se o interesse do utilizador não for encontrado.
                             if interesse_encontrado is None:
-                                print("Interesse inválido.")
-                                break
-                             #
-                            else:
-                                novo_interesse = input("Novo(s) interesse(s) (separe os interesses por ','): ")
-                                feira.editar_interesse_utilizador(nome_utilizador, nome_interesse, novo_interesse) # Chamar a função para editar o interesse do utilizador.
-                                print("Interesse(s) do utilizador atualizado(s).")
+                                print("Interesse do utilizador não foi encontrado.")
+                                break # Para voltar ao menu.
 
-                                break
-                         #
+                             # Se o interesse do utilizador for encontrado.
+                            else:
+                                novo_interesse = input("Novo(s) interesse(s) (separe os interesses por ','):\n")
+                                feira.editar_interesse_utilizador(nome_utilizador, nome_interesse, novo_interesse) # Chama 'editar_interesse_utilizador' para editar o interesse do utilizador.
+                                
+                                print("Interesse(s) do utilizador atualizado(s).")
+                                break # Para voltar ao menu.
+                        
+                        
+                         # Se o utilizador escolher '2 - Editar artigos'.
                         elif escolha_edicao == "2":
-                            feira.mostrar_artigos_utilizador(nome_utilizador)
+                            feira.mostrar_artigos_utilizador(nome_utilizador) # Mostra os artigos do utilizador.
+
                             artigos_utilizador = feira.obter_artigos_utilizador(nome_utilizador)
 
-                            nome_artigo = input("Insira o nome do artigo que deseja editar: ")
+                            nome_artigo = input("Insira o nome do artigo que deseja editar:\n")
 
-                            # Verificar se o nome do artigo inserido é válido para edição.
+                            # Verificar se o nome do artigo inserido é válido (existe).
                             artigo_encontrado = None
                             for artigo in artigos_utilizador:
                                 if nome_artigo == artigo.nome:
-                                    artigo_encontrado = artigo  # Salvar o objeto Artigo encontrado.
-                                    break
+                                    artigo_encontrado = artigo  # Salva o objeto Artigo encontrado.
+                                    break # Para o loop.
 
+                            # Se o artigo do utilizador não for encontrado.
                             if artigo_encontrado is None:
                                 print("Artigo inválido.")
-                            else:
-                                novo_nome = input("Novo nome do artigo: ")
-                                novo_preco = int(input("Novo preço: "))
-                                nova_tipologia = input("Nova tipologia: ")
-                                nova_quantidade = int(input("Nova quantidade: "))
+                                break # Para voltar ao menu.
 
-                                # Aplicar as alterações ao artigo encontrado.
+                             # Se o artigo do utilizador for encontrado.
+                            else:
+                                novo_nome = input("Novo nome do artigo:\n")
+                                novo_preco = int(input("Novo preço:\n"))
+                                nova_tipologia = input("Nova tipologia:\n")
+                                nova_quantidade = int(input("Nova quantidade:\n"))
+
+                                # Editar o artigo.
                                 artigo_encontrado.editar_nome(novo_nome)
                                 artigo_encontrado.editar_preco(novo_preco)
                                 artigo_encontrado.editar_tipo(nova_tipologia)
                                 artigo_encontrado.editar_quantidade(nova_quantidade)
                                 
                                 print("Artigo do utilizador atualizado.")
-                                
-                                break
-                         #
-                        elif escolha_edicao == "3":
+                                break # Para voltar ao menu.
+
+
+                         #  Se o utilizador escolher 'V - Voltar atrás'.
+                        elif escolha_edicao == "V":
                             break  # Para voltar ao menu.
+
 
                  # Se o utilizador escolher '3 - Eliminação de conta de um utilizador'.
                 elif escolha_utilizadores == "3":
                     nome_utilizador = input("Digite o nome do utilizador que deseja eliminar:\n")
 
-                    # Verifica se o utilizador está registado na Feira Virtual.
-                    verifica_utilizador = feira.verifica_existencia_utilizador(nome_utilizador)
+                    verifica_utilizador = feira.verifica_existencia_utilizador(nome_utilizador) # Verifica se o utilizador está registado.
 
+                    # Se o utilizador não estiver registado.
                     if verifica_utilizador == 0:
                         print("Utilizador não encontrado.")
-                        break
-                    #
+                        break # Para voltar ao menu.
+
+                     # Se o utilizador estiver registado.
                     elif verifica_utilizador == 1:
-                        # Chama a função para eliminar o utilizador.
-                        feira.eliminar_conta(nome_utilizador)
-                        break
+                        feira.eliminar_conta(nome_utilizador) # Chama a função para eliminar o utilizador.
+                        break # Para voltar ao menu.
 
 
                  # Se o utilizador escolher '4 - Lista de utilizadores'.
                 elif escolha_utilizadores == "4":
                     print("Lista de Utilizadores:")
                     lista_utilizadores = feira.listar_utilizadores()
-                    break
+                    break # Para voltar ao menu.
 
 
                  # Se o utilizador escolher '5 - Mostrar artigos de um utilizador'.
                 elif escolha_utilizadores == "5":
                     nome_mostrar_artigos = input("Introduza um utilizador para consultar os seus artigos:\n")
 
-                    # Verifica se o utilizador está registado na Feira Virtual.
-                    verifica_utilizador = feira.verifica_existencia_utilizador(nome_mostrar_artigos)
+                    verifica_utilizador = feira.verifica_existencia_utilizador(nome_mostrar_artigos) # Verifica se o utilizador está registado.
 
+                    # Se o utilizador não estiver registado.
                     if verifica_utilizador == 0:
                         print("Utilizador não encontrado.")
-                        break
+                        break # Para voltar ao menu.
+
+                     # Se o utilizador estiver registado.
                     elif verifica_utilizador == 1:
                         feira.mostrar_artigos_utilizador(nome_mostrar_artigos)
-                        break
+                        break # Para voltar ao menu.
 
 
                  # Se o utilizador escolher '6 - Mostrar interesses de um utilizador'.
                 elif escolha_utilizadores == "6":
                     nome_mostrar_interesses = input("Introduza um nome de utilizador para consultar os seus interesses:\n")
                     
-                    # Verifica se o utilizador está registado na Feira Virtual.
-                    verifica_utilizador = feira.verifica_existencia_utilizador(nome_mostrar_interesses)
+                    verifica_utilizador = feira.verifica_existencia_utilizador(nome_mostrar_interesses) # Verifica se o utilizador está registado.
 
+                    # Se o utilizador não estiver registado.
                     if verifica_utilizador == 0:
                         print("Utilizador não encontrado.")
-                        break
+                        break # Para voltar ao menu.
+
+                      # Se o utilizador estiver registado.
                     elif verifica_utilizador == 1:
                         feira.mostrar_interesses_utilizador(nome_mostrar_interesses)
-                        break
+                        break # Para voltar ao menu.
 
 
                  # Se o utilizador escolher '7 - Mostrar Pycoins de um utilizador'.
                 elif escolha_utilizadores == "7":
                     nome_mostrar_pycoins = input("Introduza um nome de utilizador para consultar os seus Pycoins:\n")
                     
-                    # Verifica se o utilizador está registado na Feira Virtual.
-                    verifica_utilizador = feira.verifica_existencia_utilizador(nome_mostrar_pycoins)
+                    verifica_utilizador = feira.verifica_existencia_utilizador(nome_mostrar_pycoins) # Verifica se o utilizador está registado.
 
+                    # Se o utilizador não estiver registado.
                     if verifica_utilizador == 0:
                         print("Utilizador não encontrado.")
-                        break
+                        break # Para voltar ao menu.
+
+                      # Se o utilizador estiver registado.
                     elif verifica_utilizador == 1:
                         feira.mostrar_pycoins_utilizador(nome_mostrar_pycoins)
-                        break
+                        break # Para voltar ao menu.
 
 
                  # Se o utilizador escolher 'V - Voltar atrás'.
@@ -867,13 +910,13 @@ def main():
                  # Se o utilizador escolher 'S - Sair'.
                 elif escolha_utilizadores.upper() == "S":
                     print("Obrigado por usar a Feira Virtual. Até logo!")
-                    return  # Para encerra o programa.
+                    return  # Para encerrar o programa.
 
 
 
          # Se o utilizador escolher '2 - Artigos'.
         elif escolha == "2":
-            # Tem de estar dentro do loop para se conseguir voltar a atrás.
+            # O código tem de estar dentro de um loop, para ser possível voltar a atrás.
             while True:
                 print("Pretende aceder a:")
                 print("1 - Mostrar preço de um artigo")
@@ -883,9 +926,9 @@ def main():
                 print("S - Sair")
 
                 escolha_artigos = input(" ")
-                escolha_artigos = escolha_artigos.upper() # Convertendo a letra minúscula para maiúscula.
+                escolha_artigos = escolha_artigos.upper() # Converte a letra minúscula para maiúscula.
 
-                # Para garantir uma das escolhas pretendidas.
+                # Para se garantir a resposta, dentro das escolhas possíveis.
                 while escolha_artigos not in ["1", "2", "3", "4", "V", "S"]:
                     print("Escolha uma opção válida:")
                     print("1 - Mostrar preço de um artigo")
@@ -895,14 +938,15 @@ def main():
                     print("S - Sair")
 
                     escolha_artigos = input(" ")
-                    escolha_artigos = escolha_artigos.upper() # Convertendo a letra minúscula para maiúscula.
+                    escolha_artigos = escolha_artigos.upper() # Converte a letra minúscula para maiúscula.
+
 
                 # Se o utilizador escolher '1 - Mostrar preço de um artigo'.
                 if escolha_artigos == "1":
                     nome_mostrar_preco = input("Introduza o artigo que deseja ver o preço:\n")
 
                     feira.mostrar_preco_artigo(nome_mostrar_preco)
-                    break
+                    break # Para voltar ao menu.
 
 
                  # Se o utilizador escolher '2 - Mostrar quantidade de um artigo'.
@@ -910,7 +954,7 @@ def main():
                     nome_mostrar_artigo = input("Introduza o artigo que deseja ver a sua quantidade:\n")
 
                     feira.mostrar_quantidade_artigo(nome_mostrar_artigo)
-                    break
+                    break # Para voltar ao menu.
                  
 
                  # Se o utilizador escolher '3 - Mostrar tipo de um artigo'.
@@ -918,7 +962,7 @@ def main():
                     nome_mostrar_tipo = input("Introduza o artigo que deseja ver a tipologia:\n")
 
                     feira.mostrar_tipo_artigo(nome_mostrar_tipo)
-                    break
+                    break # Para voltar ao menu.
                  
 
                   # Se o utilizador escolher 'V - Voltar atrás'.
@@ -929,16 +973,13 @@ def main():
                  # Se o utilizador escolher 'S - Sair'.
                 elif escolha_artigos.upper() == "S":
                     print("Obrigado por usar a Feira Virtual. Até logo!")
-                    return  # Para encerra o programa.
-
-
-
-
+                    return  # Para encerrar o programa.
 
 
 
          # Se o utilizador escolher '3 - Mercado'.
         elif escolha == "3":
+            # O código tem de estar dentro de um loop, para ser possível voltar a atrás.
             while True:
                 print("Pretende aceder a:")
                 print("1 - Adicionar Artigo ao Mercado")
@@ -948,9 +989,9 @@ def main():
                 print("S - Sair")
 
                 escolha_mercado = input(" ")
-                escolha_mercado = escolha_mercado.upper() # Convertendo a letra minúscula para maiúscula.
+                escolha_mercado = escolha_mercado.upper() # Converte a letra minúscula para maiúscula.
 
-                # Para garantir uma das escolhas pretendidas.
+                # Para se garantir a resposta, dentro das escolhas possíveis.
                 while escolha_mercado.upper() not in ["1", "2", "3", "V", "S"]:
                     print("Escolha entre:")
                     print("1 - Adicionar Artigo ao Mercado")
@@ -960,58 +1001,60 @@ def main():
                     print("S - Sair")
 
                     escolha_mercado = input(" ")
-                    escolha_mercado = escolha_mercado.upper() # Convertendo a letra minúscula para maiúscula.
+                    escolha_mercado = escolha_mercado.upper() # Converte a letra minúscula para maiúscula.
+
 
                 # Se o utilizador escolher '1 - Adicionar Artigo ao Mercado'.
                 if escolha_mercado == "1":
                     nome_utilizador = input("Digite o nome do utilizador:\n")
                 
-                    # Verifica se o utilizador está registrado na Feira Virtual.
-                    verifica_utilizador = feira.verifica_existencia_utilizador(nome_utilizador)
+                    verifica_utilizador = feira.verifica_existencia_utilizador(nome_utilizador) # Verifica se o utilizador está registado.
 
+                    # Se o utilizador não estiver registado.
                     if verifica_utilizador == 0:
                         print("Utilizador não encontrado.")
-                        break
-                    #
+                        break # Para voltar ao menu.
+                     
+                     # Se o utilizador estiver registado.
                     elif verifica_utilizador == 1:
                         print("Utilizador encontrado.")
 
                         print("Adicionar novo artigo.")
-                        nome_artigo = input("Nome do artigo: ")
-                        preco_artigo = float(input("Preço do artigo: "))
-                        tipologia_artigo = input("Tipologia do artigo: ")
-                        quantidade_artigo = int(input("Quantidade do artigo: "))
+                        nome_artigo = input("Nome do artigo:\n")
+                        preco_artigo = float(input("Preço do artigo:\n"))
+                        tipologia_artigo = input("Tipologia do artigo:\n")
+                        quantidade_artigo = int(input("Quantidade do artigo:\n"))
 
                         # Cria o objeto de artigo com as informações fornecidas.
                         novo_artigo = Artigo(nome_artigo, preco_artigo, tipologia_artigo, quantidade_artigo)
 
-                        # Adiciona o artigo ao mercado do utilizador na Feira Virtual.
+                        # Adiciona o artigo ao mercado do utilizador.
                         utilizador = None
                         for user in feira.utilizadores:
                             if user.nome == nome_utilizador:
                                 user.artigos_disponiveis.append(novo_artigo)
-                                break
+                                break # Para o loop.
                         
                         print(f"Artigo adicionado ao mercado de {nome_utilizador} com sucesso!")
-                        break
+                        break # Para voltar ao menu.
 
 
                  # Se o utilizador escolher '2 - Remover Artigo do Mercado'.
                 elif escolha_mercado == "2":
                     nome_utilizador = input("Digite o nome do utilizador:\n")
                 
-                    # Verifica se o utilizador está registrado na Feira Virtual.
-                    verifica_utilizador = feira.verifica_existencia_utilizador(nome_utilizador)
+                    verifica_utilizador = feira.verifica_existencia_utilizador(nome_utilizador) # Verifica se o utilizador está registado.
 
-                    # Verifica se o utilizador está registrado na Feira Virtual.
+                    # Se o utilizador não estiver registado.
                     if verifica_utilizador == 0:
                         print("Utilizador não encontrado.")
-                        break
+                        break # Para voltar ao menu.
+
+                     # Se o utilizador estiver registado.
                     elif verifica_utilizador == 1:
                         print("Utilizador encontrado.")
 
-                        # Mostra os artigos do mercado do utilizador.
-                        feira.mostrar_artigos_utilizador(nome_utilizador)
+                        feira.mostrar_artigos_utilizador(nome_utilizador) # Mostra os artigos do mercado do utilizador.
 
                         nome_artigo = input("Insira o nome do artigo que deseja remover:\n")
 
@@ -1020,26 +1063,31 @@ def main():
                         for user in feira.utilizadores:
                             if user.nome == nome_utilizador:
                                 utilizador = user
-                                break
-
+                                break # Para o loop.
+                        
+                        # Se o artigo for encontrado.
                         if utilizador is not None:
                             verifica_artigo = utilizador.verifica_existencia_artigo(nome_artigo)
 
+                            # Se o artigo não estiver registado.
                             if verifica_artigo == 0:
                                 print("O artigo especificado não foi encontrado no mercado do utilizador.")
+                                break # Para voltar ao menu.
+                            
+                             # Se o artigo estiver registado.
                             elif verifica_artigo == 1:
                                 # Remove o artigo do mercado do utilizador na Feira Virtual.
                                 for artigo in utilizador.artigos_disponiveis:
                                     if artigo.nome == nome_artigo:
                                         utilizador.remover_artigo(artigo)
                                         print("Artigo removido com sucesso!")
-                                        break
+                                        break # Para voltar ao menu.
 
 
                  # Se o utilizador escolher '3 - Listar Artigos do Mercado'.
                 elif escolha_mercado == "3":
                         feira.listar_artigos()
-                        break
+                        break # Para voltar ao menu.
 
 
                  #  Se o utilizador escolher 'V - Voltar atrás'.
@@ -1050,7 +1098,8 @@ def main():
                  #  Se o utilizador escolher 'S - Sair'.
                 elif escolha_mercado.upper() == "S":
                     print("Obrigado por usar a Feira Virtual. Até logo!")
-                    return  # Para encerra o programa.
+                    return  # Para encerrar o programa.
+
 
 
 # Para tudo funcionar.
