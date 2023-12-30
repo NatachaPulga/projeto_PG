@@ -19,7 +19,7 @@ class Utilizador:
             # Adiciona uma nova avaliação, podendo incluir um comentário.
             def deixar_avaliacao(self, estrelas, comentario):
                 self.avaliacoes.append({"estrelas": estrelas, "comentario": comentario})
-                print(f"Avaliação do utilizador {self.nome}, foi registrada com sucesso!")
+                print(f"Avaliação do utilizador {self.nome}, foi registada com sucesso!")
 
             # Apresenta todas as avaliações e comentários.
             def listar_avaliacoes(self):
@@ -460,7 +460,7 @@ class FeiraVirtual:
 
                  # Se não se verificar que o vendedor existe.
                 else:
-                    print(f"O vendedor '{vendedor}' não está registrado.")
+                    print(f"O vendedor '{vendedor}' não está registado.")
 
             # Encontra os nomes de utilizadores interessados no artigo recebido.
             def encontrar_compradores_interessados(self, artigo):
@@ -762,7 +762,7 @@ def main():
 
                             interesses_utilizador = feira.obter_interesses_utilizador(nome_utilizador)
 
-                            nome_interesse = input("Insira o nome do artigo que deseja editar:\n")
+                            nome_interesse = input("Insira o nome do interesse que deseja editar:\n")
 
                             # Verifique se o nome do interesse inserido é válido (existe).
                             interesse_encontrado = None
