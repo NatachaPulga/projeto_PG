@@ -197,7 +197,7 @@ class FeiraVirtual:
                 # Criação da lista de artigos do utilizador. Caso não existem artigos, é criado um utilizador com lista de artigos vazia.
                 artigos_utilizador = []
                 for artigo in artigos:
-                    novo_artigo = Artigo(artigo[0], int(artigo[1]), artigo[2], int(artigo[3])) # artigo[0] corresponde ao nome, artigo[1] é o preço, artigo[2] é a tipologia e artigo[3] a quantidade.
+                    novo_artigo = Artigo(artigo[0], float(artigo[1]), artigo[2], int(artigo[3])) # artigo[0] corresponde ao nome, artigo[1] é o preço, artigo[2] é a tipologia e artigo[3] a quantidade.
                     artigos_utilizador.append(novo_artigo)
 
                 nome_utilizador = self.gera_nome_utilizador_unico(nome)
@@ -224,7 +224,7 @@ class FeiraVirtual:
                                 info_artigo = artigo.split(',')
                                 if len(info_artigo) == 4:
                                     nome_artigo = info_artigo[0]
-                                    preco = info_artigo[1]
+                                    preco = float(info_artigo[1])
                                     tipologia = info_artigo[2]
                                     quantidade = int(info_artigo[3])
                                     novo_artigo = Artigo(nome_artigo, preco, tipologia, quantidade)
@@ -268,7 +268,7 @@ class FeiraVirtual:
                         # Criação da lista de artigos do utilizador.
                         artigos_utilizador = []
                         for artigo in artigos:
-                            novo_artigo = Artigo(artigo[0], int(artigo[1]), artigo[2], int(artigo[3])) # artigo[0] corresponde ao nome, artigo[1] é o preço, artigo[2] é a tipologia e artigo[3] a quantidade.
+                            novo_artigo = Artigo(artigo[0], float(artigo[1]), artigo[2], int(artigo[3])) # artigo[0] corresponde ao nome, artigo[1] é o preço, artigo[2] é a tipologia e artigo[3] a quantidade.
                             artigos_utilizador.append(novo_artigo)
 
                         # Gera um nome de utilizador único.
@@ -808,7 +808,7 @@ def main():
                              # Se o artigo do utilizador for encontrado.
                             else:
                                 novo_nome = input("Novo nome do artigo:\n")
-                                novo_preco = int(input("Novo preço:\n"))
+                                novo_preco = float(input("Novo preço:\n"))
                                 nova_tipologia = input("Nova tipologia:\n")
                                 nova_quantidade = int(input("Nova quantidade:\n"))
 
@@ -1173,8 +1173,3 @@ main()
 
     #Teste listar artigos da feira por ordem 
     #feira_virtual.listar_artigos()
-
-
-# diversão começa quando os utilizadores descobrem que certos artigos têm valores de 
-# mercado que podem variar com base na oferta e procura
-    
